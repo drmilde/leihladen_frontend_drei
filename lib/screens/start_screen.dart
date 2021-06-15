@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/config.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:leihladen_frontend_drei/screens/hauptseiten/haupt_seite_screen.dart';
+import 'package:leihladen_frontend_drei/screens/hauptseiten/home_screen.dart';
 import 'package:leihladen_frontend_drei/screens/katalog/katalog_screen.dart';
 
 class StartScreen extends StatelessWidget {
@@ -13,12 +15,30 @@ class StartScreen extends StatelessWidget {
       body: Container(
           color: Colors.green,
           child: Center(
-            child: ElevatedButton(
-              child: Text("KatalogScreen"),
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (content) => KatalogScreen()));
-              },
+            child: Column(
+              children: [
+                ElevatedButton(
+                  child: Text("KatalogScreen"),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (content) => KatalogScreen()));
+                  },
+                ),
+                ElevatedButton(
+                  child: Text("HomeScreen"),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (content) => HomeScreen()));
+                  },
+                ),
+                ElevatedButton(
+                  child: Text("HauptSeiteScreen"),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (content) => HauptSeiteScreen()));
+                  },
+                ),
+              ],
             ),
           )),
     );

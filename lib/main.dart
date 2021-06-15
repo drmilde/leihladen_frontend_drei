@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leihladen_frontend_drei/config/color_config.dart';
 import 'screens/loader/loader_screen.dart';
 
 void main() {
@@ -11,8 +12,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Leihladen Frontend 3',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: new ThemeData(
+        primaryColor: ColorConfig.fromHex("#FF35ac57"),
+        primaryColorDark: ColorConfig.fromHex("#FF23733a"),
+        accentColor: ColorConfig.fromHex("#FF82fcd7"),
+        scaffoldBackgroundColor: ColorConfig.fromHex("#FFFFFFFF"),
+        bottomAppBarColor: ColorConfig.fromHex("#FFEEEEEE"),
       ),
       home: LoaderScreen(),
     );

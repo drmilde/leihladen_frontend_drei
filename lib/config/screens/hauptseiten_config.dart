@@ -1,5 +1,7 @@
 
 
+import 'package:flutter/material.dart';
+import 'package:leihladen_frontend_drei/config/color_config.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
 
 class HauptseitenConfig {
@@ -12,6 +14,10 @@ class HauptseitenConfig {
     String value = _getScreenVal("/content/image/team");
 
     return "${basicUrl}${galleryDir}${value}";
+  }
+
+  Color getPrimaryColor() {
+    return ColorConfig.fromHex(DataModel.config.colorConfig.PrimaryColor);
   }
 
   String getHeaderImageUrl() {
