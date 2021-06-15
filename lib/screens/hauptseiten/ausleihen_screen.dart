@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/screens/ausleihen_config_screen.dart';
+import 'package:leihladen_frontend_drei/config/store.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/leihausweis_screen.dart';
 import 'package:leihladen_frontend_drei/screens/katalog/katalog_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/app_drawer_widget.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
@@ -21,7 +23,7 @@ class _AusleihenScreenState extends State<AusleihenScreen> {
     callbacks = [
       () {
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => KatalogScreen()));
+            .push(MaterialPageRoute(builder: (context) => LeihausweisScreen()));
       },
       () {},
       () {},
