@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leihladen_frontend_drei/config/screens/app_drawer_widget_config.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/leihausweis_screen.dart';
 import 'package:leihladen_frontend_drei/screens/start_screen.dart';
@@ -6,6 +7,8 @@ import 'package:leihladen_frontend_drei/screens/start_screen.dart';
 import 'app_drawer_entry_widget.dart';
 
 class AppDrawerWidget extends StatelessWidget {
+  AppDrawerWidgetConfig config = AppDrawerWidgetConfig();
+
   @override
   Widget build(BuildContext context) {
     String nachname = "Kein";
@@ -37,10 +40,13 @@ class AppDrawerWidget extends StatelessWidget {
                         builder: (context) => LeihausweisScreen()));
               },
               child: UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: config.getPrimaryColor(),
+                ),
                 accountName: Text("${nachname} ${vorname}"),
                 accountEmail: Text("${adresse}"),
                 currentAccountPicture: CircleAvatar(
-                  backgroundColor: Theme.of(context).accentColor,
+                  backgroundColor: Theme.of(context).primaryColor,
                   child: Text(
                     "${vorname[0]}${nachname[0]}",
                     style: TextStyle(fontSize: 40.0),

@@ -18,7 +18,7 @@ class AbholenScreen extends StatelessWidget {
             //title: Text("Abholen"),
             backgroundColor: config.getPrimaryColor(),
             flexibleSpace: FlexibleSpaceBar(
-              centerTitle: false,
+              centerTitle: true,
               title: Text(config.getAppbarTitle()),
               background: Container(
                 height: 234,
