@@ -9,12 +9,7 @@ class DataModel {
   static late Config config;
 
   DataModel() {
-    // TODO Initialisierung
-    store = Store(
-        stand: "24.05.2021",
-        version: "1.0",
-        leihausweis: Leihausweis(),
-        warenkorb: Warenkorb());
+    store = Store.init();
   }
 
   static setConfig(Config c) {

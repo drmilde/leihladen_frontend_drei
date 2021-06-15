@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/config.dart';
 import 'package:leihladen_frontend_drei/config/persistence.dart';
 import 'package:leihladen_frontend_drei/config/store.dart';
+import 'package:leihladen_frontend_drei/katalog/katalog.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
 import 'package:leihladen_frontend_drei/model/json_loader.dart';
 import 'package:leihladen_frontend_drei/screens/start_screen.dart';
@@ -14,7 +15,7 @@ class LoaderScreen extends StatefulWidget {
 
 class _LoaderScreenState extends State<LoaderScreen> {
   Future<bool> loadConfigAndStore() async {
-    // Store laden, bzw initialisieren
+    // 1. Store laden, bzw initialisieren
     String jsonString = await Persistence.load();
     jsonString = jsonString.trim();
     print("Storedaten... '${jsonString}'");
@@ -28,10 +29,14 @@ class _LoaderScreenState extends State<LoaderScreen> {
       print("Store ist leer ... wurde initialisiert und persistiert");
     }
 
-    // Config laden
+    // 2. Config laden
     JsonLoader loader = new JsonLoader();
     Config config = await loader.loadUncompressedConfigFromServer();
     DataModel.setConfig(config);
+
+    // 3. load the katalog
+    // Katalog catalog = await loader.loadUncompressedCatalogDataFromServer();
+    // print (katalogToJson(catalog));
 
     return true;
   }

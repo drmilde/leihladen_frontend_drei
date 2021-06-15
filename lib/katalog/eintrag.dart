@@ -5,6 +5,7 @@ class Eintrag {
     this.bilder = const [],
     this.beschreibung = "",
     this.dimension = "",
+    this.enthaelt = const [],
     this.gewicht = "",
     this.kleinteil = "",
     this.kaution = "",
@@ -24,6 +25,7 @@ class Eintrag {
   List<String> bilder;
   String beschreibung;
   String dimension;
+  List<String> enthaelt;
   String gewicht;
   String kleinteil;
   String kaution;
@@ -43,18 +45,19 @@ class Eintrag {
         bilder: List<String>.from(json["bilder"].map((x) => x)),
         beschreibung: json["beschreibung"],
         dimension: json["dimension"],
+        enthaelt: List<String>.from(json["enthaelt"].map((x) => x)),
         gewicht: json["gewicht"],
         kleinteil: json["kleinteil"],
         kaution: json["kaution"],
         kosten: json["kosten"],
         kategorien: List<int>.from(json["kategorien"].map((x) => x)),
-        raum: json["Raum"],
-        seriennummer: json["Seriennummer"],
-        hersteller: json["Hersteller"],
-        typ: json["Typ"],
-        lieferantenname: json["Lieferantenname"],
-        aktivdatum: json["Aktivdatum"],
-        anschWert: json["AnschWert"],
+        raum: json["raum"],
+        seriennummer: json["seriennummer"],
+        hersteller: json["hersteller"],
+        typ: json["typ"],
+        lieferantenname: json["lieferantenname"],
+        aktivdatum: json["aktivdatum"],
+        anschWert: json["anschwert"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -63,17 +66,18 @@ class Eintrag {
         "bilder": List<dynamic>.from(bilder.map((x) => x)),
         "beschreibung": beschreibung,
         "dimension": dimension,
+        "enthaelt": List<dynamic>.from(enthaelt.map((x) => x)),
         "gewicht": gewicht,
         "kleinteil": kleinteil,
         "kaution": kaution,
         "kosten": kosten,
         "kategorien": List<dynamic>.from(kategorien.map((x) => x)),
-        "Raum": raum,
-        "Seriennummer": seriennummer,
-        "Hersteller": hersteller,
-        "Typ": typ,
-        "Lieferantenname": lieferantenname,
-        "Aktivdatum": aktivdatum,
-        "AnschWert": anschWert,
+        "raum": raum,
+        "seriennummer": seriennummer,
+        "hersteller": hersteller,
+        "typ": typ,
+        "lieferantenname": lieferantenname,
+        "aktivdatum": aktivdatum,
+        "anschwert": anschWert,
       };
 }

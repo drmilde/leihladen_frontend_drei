@@ -1,9 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
-
-import '../model/json_loader.dart';
 
 Katalog katalogFromJson(String str) => Katalog.fromJson(json.decode(str));
 
@@ -51,20 +48,6 @@ class Katalog {
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
 
-  // Load from assets
-  static Future<Katalog> loadFromAsset() async {
-    String data =
-        await rootBundle.loadString('assets/katalog/av_inventar.json');
-    //print(data);
-    return katalogFromJson(data.trim());
-  }
-
-  static Future<Katalog> loadUncompressedFromServer() async {
-    JsonLoader loader = new JsonLoader();
-    Katalog k = await loader.loadUncompressedCatalogDataFromServer(
-        katalogFileName: "json_daten_formatiert.json");
-    return k;
-  }
 
   List<Eintrag> filterKategorie(Kategorie kat) {
     return data.where((e) => e.kategorien.contains(kat.index)).toList();
