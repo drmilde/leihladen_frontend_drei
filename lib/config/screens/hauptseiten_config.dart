@@ -7,6 +7,7 @@ import 'package:leihladen_frontend_drei/model/data_model.dart';
 class HauptseitenConfig {
   String seitenName = "HomeScreen";
   String galleryDir = DataModel.config.netzwerkConfig.galleryDir;
+  String iconsDir = DataModel.config.netzwerkConfig.iconsDir;
   String headerDir = DataModel.config.netzwerkConfig.headerDir;
   String basicUrl = DataModel.config.netzwerkConfig.getBasicUrl();
 
@@ -25,6 +26,8 @@ class HauptseitenConfig {
 
     return "${basicUrl}${headerDir}${value}";
   }
+
+
 
   String getAppbarTitle() {
     return getScreenVal("/appbar/title");
