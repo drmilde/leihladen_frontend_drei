@@ -39,8 +39,8 @@ class Store {
     this.leihausweis = Leihausweis(
       adresse: "Dingelstedtstrasse 12, Fulda",
       geburtsjahr: "2019",
-      nachname: "Leihausweis erstellen",
-      vorname: "Bitte",
+      vorname: "Leihausweis erstellen",
+      nachname: "Bitte",
       mobile: "leihladenfulda@gmail.com",
       passwort: "kein passwort",
       udid: "keine ausweisnummer",

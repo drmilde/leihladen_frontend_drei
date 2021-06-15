@@ -34,6 +34,10 @@ class HauptseitenConfig {
     return "${basicUrl}${iconsDir}${value}";
   }
 
+  String getBeschreibungText() {
+    return getScreenVal("/content/text/beschreibung");
+  }
+
   String getAppbarTitle() {
     return getScreenVal("/appbar/title");
   }

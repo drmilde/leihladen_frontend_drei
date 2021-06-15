@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/config.dart';
 import 'package:leihladen_frontend_drei/config/persistence.dart';
 import 'package:leihladen_frontend_drei/config/store.dart';
-import 'package:leihladen_frontend_drei/katalog/katalog.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
 import 'package:leihladen_frontend_drei/model/json_loader.dart';
 import 'package:leihladen_frontend_drei/screens/start_screen.dart';

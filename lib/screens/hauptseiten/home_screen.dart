@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/screens/home_screen_config.dart';
+import 'package:leihladen_frontend_drei/widgets/app_drawer_widget.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -24,6 +25,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildContent() {;
 
     return Scaffold(
+      endDrawer: AppDrawerWidget(),
       body: CustomScrollView(
         key: key,
         slivers: [

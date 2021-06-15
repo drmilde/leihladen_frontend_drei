@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/screens/mitmachen_screen_config.dart';
 import 'package:leihladen_frontend_drei/screens/katalog/katalog_screen.dart';
+import 'package:leihladen_frontend_drei/widgets/app_drawer_widget.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/kachel_widget.dart';
 
@@ -45,6 +46,7 @@ class _MitmachenScreenState extends State<MitmachenScreen> {
 
   Widget _buildContent() {
     return Scaffold(
+      endDrawer: AppDrawerWidget(),
       body: CustomScrollView(
         key: key,
         slivers: [
@@ -64,6 +66,20 @@ class _MitmachenScreenState extends State<MitmachenScreen> {
                   fit: BoxFit.cover,
                   image: NetworkImage(config.getHeaderImageUrl()),
                 )),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: Text(
+                  config.getBeschreibungText(),
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
               ),
             ),
           ),
