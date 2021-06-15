@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/color_config.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
@@ -27,7 +25,14 @@ class HauptseitenConfig {
     return "${basicUrl}${headerDir}${value}";
   }
 
+  String getKachelText(int index) {
+    return getScreenVal("/content/kachel${index}/text");
+  }
 
+  String getKachelIcon(int index) {
+    String value = getScreenVal("/content/kachel${index}/icon");
+    return "${basicUrl}${iconsDir}${value}";
+  }
 
   String getAppbarTitle() {
     return getScreenVal("/appbar/title");

@@ -1,11 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/screens/auswaehlen_screen_config.dart';
+import 'package:leihladen_frontend_drei/screens/katalog/katalog_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/kachel_widget.dart';
 
-class AuswaehlenScreen extends StatelessWidget {
+class AuswaehlenScreen extends StatefulWidget {
+  @override
+  _AuswaehlenScreenState createState() => _AuswaehlenScreenState();
+}
+
+class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
   AuswaehlenScreenConfig config = new AuswaehlenScreenConfig();
   final key = UniqueKey();
+  List<VoidCallback> callbacks = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    callbacks = [
+      () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => KatalogScreen()));
+      },
+      () {},
+      () {},
+      () {},
+      () {},
+      () {},
+      () {},
+      () {},
+      () {},
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +73,13 @@ class AuswaehlenScreen extends StatelessWidget {
               ),
             ),
           ),
-          _creadeSliverGrid(),
+          _createSliverGrid(),
         ],
       ),
     );
   }
 
-  Widget _creadeSliverGrid() {
+  Widget _createSliverGrid() {
     int crossCount = 3;
     return SliverGrid(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -86,8 +113,13 @@ class AuswaehlenScreen extends StatelessWidget {
           child: Center(
             child: Padding(
               padding: const EdgeInsets.only(left: 8, top: 8, right: 4),
-              child: KachelWidget(color, config.getKachelText(index + 1), index,
-                  config.getKachelIcon(index + 1)),
+              child: KachelWidget(
+                color,
+                config.getKachelText(index + 1),
+                index,
+                config.getKachelIcon(index + 1),
+                callback: callbacks[index],
+              ),
             ),
           ),
         );
@@ -97,8 +129,13 @@ class AuswaehlenScreen extends StatelessWidget {
           child: Center(
             child: Padding(
               padding: const EdgeInsets.only(left: 4, top: 8, right: 8),
-              child: KachelWidget(color, config.getKachelText(index + 1), index,
-                  config.getKachelIcon(index + 1)),
+              child: KachelWidget(
+                color,
+                config.getKachelText(index + 1),
+                index,
+                config.getKachelIcon(index + 1),
+                callback: callbacks[index],
+              ),
             ),
           ),
         );
@@ -108,8 +145,13 @@ class AuswaehlenScreen extends StatelessWidget {
           child: Center(
             child: Padding(
               padding: const EdgeInsets.only(left: 4, top: 8, right: 4),
-              child: KachelWidget(color, config.getKachelText(index + 1), index,
-                  config.getKachelIcon(index + 1)),
+              child: KachelWidget(
+                color,
+                config.getKachelText(index + 1),
+                index,
+                config.getKachelIcon(index + 1),
+                callback: callbacks[index],
+              ),
             ),
           ),
         );
