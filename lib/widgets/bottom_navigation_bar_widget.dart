@@ -29,7 +29,6 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
         setState(() {
           widget.currentIndex = index;
           widget.hauptSeite.setSelectedIndex(index);
-          // TODO auf index reagieren
         });
       },
       items: [

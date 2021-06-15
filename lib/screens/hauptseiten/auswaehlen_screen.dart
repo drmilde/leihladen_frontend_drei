@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:leihladen_frontend_drei/config/screens/home_screen_config.dart';
+import 'package:leihladen_frontend_drei/config/screens/auswaehlen_screen_config.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreenConfig config = new HomeScreenConfig();
+class AuswaehlenScreen extends StatelessWidget {
+  AuswaehlenScreenConfig config = new AuswaehlenScreenConfig();
   final key = UniqueKey();
 
   @override
@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
     return DynamicScaffold(
       drawer: Container(),
       appbar: AppBar(
-        title: Text("Katalogliste"),
+        title: Text("Auswählen"),
       ),
       fab: Container(),
       showDrawer: false,
@@ -21,8 +21,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContent() {;
-
+  Widget _buildContent() {
     return Scaffold(
       body: CustomScrollView(
         key: key,
@@ -51,7 +50,7 @@ class HomeScreen extends StatelessWidget {
               (context, index) {
                 return _getContent(index);
               },
-              childCount: 5,
+              childCount: 25,
             ),
           ),
         ],
@@ -60,25 +59,11 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _getContent(int index) {
-    if (index == 3) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 234,
-          width: 500,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(config.getLagerImageUrl()),
-              )),
-        ),
-      );
-    }
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          config.getText(index),
+          "Auswaehlen mach Spass",
           textAlign: TextAlign.justify,
           style: TextStyle(),
         ),

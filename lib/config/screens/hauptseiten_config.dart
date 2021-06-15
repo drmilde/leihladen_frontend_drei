@@ -11,7 +11,7 @@ class HauptseitenConfig {
   String basicUrl = DataModel.config.netzwerkConfig.getBasicUrl();
 
   String getTeamImageUrl() {
-    String value = _getScreenVal("/content/image/team");
+    String value = getScreenVal("/content/image/team");
 
     return "${basicUrl}${galleryDir}${value}";
   }
@@ -21,17 +21,17 @@ class HauptseitenConfig {
   }
 
   String getHeaderImageUrl() {
-    String value = _getScreenVal("/content/image/header");
+    String value = getScreenVal("/content/image/header");
 
     return "${basicUrl}${headerDir}${value}";
   }
 
   String getAppbarTitle() {
-    return _getScreenVal("/appbar/title");
+    return getScreenVal("/appbar/title");
   }
 
   // helper
-  String _getScreenVal(String key) {
+  String getScreenVal(String key) {
     return DataModel.config.screenConfig.getScreen(seitenName).getVal(key);
   }
 }
