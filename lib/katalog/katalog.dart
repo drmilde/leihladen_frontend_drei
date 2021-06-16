@@ -48,6 +48,21 @@ class Katalog {
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
 
+  // Helper
+
+  void sortAscending() {
+    data.sort((a, b) =>
+        a.bezeichnung.toLowerCase().compareTo(b.bezeichnung.toLowerCase()));
+  }
+
+  void sortDescending() {
+    data.sort((a, b) =>
+        b.bezeichnung.toLowerCase().compareTo(a.bezeichnung.toLowerCase()));
+  }
+
+  void sortInventarnummer() {
+    data.sort((a, b) => a.inventarnummer.compareTo(b.inventarnummer));
+  }
 
   List<Eintrag> filterKategorie(Kategorie kat) {
     return data.where((e) => e.kategorien.contains(kat.index)).toList();

@@ -6,12 +6,16 @@ class HauptseitenConfig {
   String seitenName = "HomeScreen";
   String galleryDir = DataModel.config.netzwerkConfig.galleryDir;
   String iconsDir = DataModel.config.netzwerkConfig.iconsDir;
+  String imageDir = DataModel.config.netzwerkConfig.imageDir;
   String headerDir = DataModel.config.netzwerkConfig.headerDir;
   String basicUrl = DataModel.config.netzwerkConfig.getBasicUrl();
 
+  String getKatalogImageUrl(String name) {
+    return "${basicUrl}${imageDir}${name}";
+  }
+
   String getTeamImageUrl() {
     String value = getScreenVal("/content/image/team");
-
     return "${basicUrl}${galleryDir}${value}";
   }
 
