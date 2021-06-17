@@ -24,7 +24,8 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => KatalogScreen(
-              kategorie: 0,
+              kategorie: config.getKachelKategorie(1),
+              title: config.getKachelText(1),
             ),
           ),
         );
@@ -33,7 +34,8 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => KatalogScreen(
-              kategorie: 1,
+              kategorie: config.getKachelKategorie(2),
+              title: config.getKachelText(2),
             ),
           ),
         );
@@ -42,7 +44,8 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => KatalogScreen(
-              kategorie: 2,
+              kategorie: config.getKachelKategorie(3),
+              title: config.getKachelText(3),
             ),
           ),
         );
@@ -51,7 +54,8 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => KatalogScreen(
-              kategorie: 3,
+              kategorie: config.getKachelKategorie(4),
+              title: config.getKachelText(4),
             ),
           ),
         );
@@ -60,7 +64,8 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => KatalogScreen(
-              kategorie: 4,
+              kategorie: config.getKachelKategorie(5),
+              title: config.getKachelText(5),
             ),
           ),
         );
@@ -69,7 +74,8 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => KatalogScreen(
-              kategorie: 5,
+              kategorie: config.getKachelKategorie(6),
+              title: config.getKachelText(6),
             ),
           ),
         );
@@ -78,7 +84,8 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => KatalogScreen(
-              kategorie: 6,
+              kategorie: config.getKachelKategorie(7),
+              title: config.getKachelText(7),
             ),
           ),
         );
@@ -87,7 +94,8 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => KatalogScreen(
-              kategorie: 7,
+              kategorie: config.getKachelKategorie(8),
+              title: config.getKachelText(8),
             ),
           ),
         );
@@ -96,16 +104,8 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => KatalogScreen(
-              kategorie: 8,
-            ),
-          ),
-        );
-      },
-      () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => KatalogScreen(
-              kategorie: 9,
+              kategorie: config.getKachelKategorie(9),
+              title: config.getKachelText(9),
             ),
           ),
         );

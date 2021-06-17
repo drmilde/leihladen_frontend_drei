@@ -6,6 +6,7 @@ Katalog katalogFromJson(String str) => Katalog.fromJson(json.decode(str));
 
 String katalogToJson(Katalog data) => json.encode(data.toJson());
 
+/*
 enum Kategorie {
   AZ, // 0 -> 0
   Haushalt, // 2 -> 1
@@ -24,6 +25,8 @@ enum Kategorie {
   Verschwunden, // 14
   Defekt, // 15
 }
+
+ */
 
 class Katalog {
   Katalog({
@@ -66,7 +69,6 @@ class Katalog {
 
   List<Eintrag> filterKategorie(int index) {
     return data.where((e) {
-      print (e.kategorien);
       return e.kategorien.contains(index);
     }).toList();
   }

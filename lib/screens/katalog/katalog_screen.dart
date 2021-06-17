@@ -7,9 +7,10 @@ import 'package:leihladen_frontend_drei/widgets/search_widget.dart';
 
 class KatalogScreen extends StatefulWidget {
   int kategorie = 0;
+  String title = "Katalog";
   late KatalogFilteredListWidget listWidget;
 
-  KatalogScreen({this.kategorie = 0}) {
+  KatalogScreen({this.kategorie = 0, this.title = "Katalog"}) {
     listWidget = KatalogFilteredListWidget(
       kategorie: this.kategorie,
     );
@@ -31,7 +32,7 @@ class _KatalogScreenState extends State<KatalogScreen> {
       showDrawer: false,
       appbar: AppBar(
         backgroundColor: config.getPrimaryColor(),
-        title: Text("Katalogliste"),
+        title: Text(widget.title),
         actions: [
           IconButton(
             onPressed: () {
