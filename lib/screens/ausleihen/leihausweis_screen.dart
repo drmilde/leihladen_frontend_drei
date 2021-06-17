@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:leihladen_frontend_drei/config/screens/leihausweis_screen_config.dart';
 import 'package:leihladen_frontend_drei/config/store.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
-import 'package:leihladen_frontend_drei/screens/start_screen.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/qr_code_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 
 class LeihausweisScreen extends StatefulWidget {
@@ -10,6 +12,7 @@ class LeihausweisScreen extends StatefulWidget {
 }
 
 class _LeihausweisScreenState extends State<LeihausweisScreen> {
+  LeihausweisScreenConfig config = LeihausweisScreenConfig();
   String UDID = "Ihre Ausweisnummer";
 
   TextEditingController _controllerNachname = TextEditingController();
@@ -26,7 +29,8 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
     // TODO: implement initState
     super.initState();
 
-    DataModel.loadStore();
+    //DataModel.loadStore();
+
     Leihausweis ausweis = DataModel.store.leihausweis;
     _controllerNachname.text = ausweis.nachname;
     _controllerVorname.text = ausweis.vorname;
@@ -34,6 +38,8 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
     _controllerMobile.text = ausweis.mobile;
     _controllerGeburtsjahr.text = ausweis.geburtsjahr;
     _controllerPasswort.text = ausweis.passwort;
+
+    _updateUdid();
 
     // reset to position 0
     // TODO reset to position 0
@@ -49,9 +55,7 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
-    transmitData();
-    _saveData();
+    _validateForm(callSetState: false);
   }
 
   @override
@@ -67,35 +71,32 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
       showFab: false,
       body: _buildContent(),
     );
-
   }
-
 
   Widget _buildContent() {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Leihausweis"),
+        title: Text(config.getAppbarTitle()),
         centerTitle: false,
+        backgroundColor: config.getPrimaryColor(),
         actions: [
           IconButton(
             icon: Icon(Icons.clear),
             onPressed: _clearForm,
           ),
           IconButton(
-            icon: Icon(Icons.check),
+            icon: Icon(Icons.save),
             onPressed: _validateForm,
           ),
           IconButton(
             icon: Icon(Icons.qr_code),
             onPressed: () {
               _updateUdid();
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  //builder: (context) => QrCodeScreen(_createJsonObscured(),
-                  // TODO QR einbinden und _createJsonObscured auskommentieren
-                  builder: (context) => StartScreen(),
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => QrCodeScreen(
+                  _createJsonObscured(),
                 ),
-              );
+              ));
             },
           ),
         ],
@@ -103,18 +104,28 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
+              /*
             child: Text(
               "Füllen Sie bitte das Formular aus und erstellen Sie so Ihren digitalen Leihausweis."
-                  " Mit dem digitalen Leihausweis weisen Sie sich vor Ort im Leihladen aus."
-                  " Ihre Daten werden *NICHT* übertragen und ausschliesslich auf Ihrem Handy gespeichert."
-                  " Wir haben keinen Zugriff auf Ihrer personenbezogenen Daten."
-                  "\n\nIhre Ausweisnummer: ${UDID.hashCode}",
+              " Mit dem digitalen Leihausweis weisen Sie sich vor Ort im Leihladen aus."
+              " Ihre Daten werden *NICHT* übertragen und ausschliesslich auf Ihrem Handy gespeichert."
+              " Wir haben keinen Zugriff auf Ihrer personenbezogenen Daten."
+              "\n\nIhre Ausweisnummer: ${UDID.hashCode}",
               textAlign: TextAlign.justify,
             ),
-          ),
+             */
+              child: Container(
+                child: Text(
+                  "${config.getBeschreibungText()} \n\nAusweisnummer: ${UDID.hashCode}",
+                  textAlign: TextAlign.justify,
+                  style: GoogleFonts.nunito(
+                    fontSize: 14,
+                  ),
+                ),
+              )),
           SizedBox(
-            height: 16,
+            height: 8,
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -224,7 +235,7 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
     );
   }
 
-  void _updateUdid() {
+  void _updateUdid({bool callSteState = true}) {
     String name = _controllerNachname.text.trim();
     String vorname = _controllerVorname.text.trim();
     String adresse = _controllerAdresse.text.trim();
@@ -232,10 +243,10 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
     String geburtsjahr = _controllerGeburtsjahr.text.trim();
     String passwort = _controllerPasswort.text.trim();
     UDID = "${name}:${vorname}:${adresse}:${email}:${geburtsjahr}:${passwort}";
-    transmitData();
-
     // update UI
-    setState(() {});
+    if (callSteState) {
+      setState(() {});
+    }
   }
 
   void _clearForm() {
@@ -248,7 +259,14 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
     _updateUdid();
   }
 
-  void _validateForm() {
+  void _validateForm({bool callSetState = true}) {
+    if (!callSetState) {
+      _saveData();
+      return;
+    }
+
+    int err = 0;
+
     String name = _controllerNachname.text.trim();
     String vorname = _controllerVorname.text.trim();
     String adresse = _controllerAdresse.text.trim();
@@ -258,31 +276,37 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
 
     if (name.isEmpty) {
       showMessage("Bitte geben Sie einen Namen ein");
-      return;
+      err++;
     }
     if (vorname.isEmpty) {
       showMessage("Bitte geben Sie einen Vornamen ein");
-      return;
+      err++;
     }
     if (adresse.isEmpty) {
       showMessage("Bitte geben Sie eine Adresse ein");
-      return;
+      err++;
     }
     if (email.isEmpty) {
       showMessage("Bitte geben Sie eine email ein");
-      return;
+      err++;
     }
     if (geburtsjahr.isEmpty) {
       showMessage("Bitte geben Sie Ihr Geburtsjahr ein");
-      return;
+      err++;
     }
     if (passwort.isEmpty) {
       showMessage("Bitte geben Sie ein Passwort ein");
-      return;
+      err++;
     }
-    _updateUdid();
-    _saveData();
-    Navigator.of(context).pop();
+
+    if (err > 0) {
+      _popupValidationDialog(context);
+    } else {
+      _updateUdid(callSteState: callSetState);
+      transmitData();
+      _saveData();
+      Navigator.of(context).pop();
+    }
   }
 
   void showMessage(String msg) {
@@ -304,11 +328,27 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
     DataModel.store.leihausweis.udid = "${UDID.hashCode}";
   }
 
-  /*
+  _popupValidationDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Leihausweis nicht vollständig'),
+            content: Text('Bitte füllen Sie den Leihausweis komplett aus.'
+                ' Nur so können Sie Dinge ausleihen.'),
+            actions: <Widget>[
+              FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Ok')),
+            ],
+          );
+        });
+  }
+
   String _createJsonObscured() {
     transmitData();
     return leihausweisToJsonObscured(DataModel.store.leihausweis);
   }
-
-   */
 }

@@ -144,8 +144,8 @@ class KatalogDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRow(String caption, String text, {double width = 250}) {
-    double fontSize = 16;
+  Widget _buildRow(String caption, String text, {double width = 200}) {
+    double fontSize = 14;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,

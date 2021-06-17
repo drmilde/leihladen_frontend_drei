@@ -24,8 +24,8 @@ class Communication {
   String get serverName {
     //return 'medsrv.informatik.hs-fulda.de';
     //return "h2834086.stratoserver.net";
-    return '10.0.2.2';
-    //return 'localhost';
+    //return '10.0.2.2';
+    return 'localhost';
   }
 
   int get port {
