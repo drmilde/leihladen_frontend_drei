@@ -64,8 +64,19 @@ class Katalog {
     data.sort((a, b) => a.inventarnummer.compareTo(b.inventarnummer));
   }
 
-  List<Eintrag> filterKategorie(Kategorie kat) {
-    return data.where((e) => e.kategorien.contains(kat.index)).toList();
+  List<Eintrag> filterKategorie(int index) {
+    return data.where((e) {
+      print (e.kategorien);
+      return e.kategorien.contains(index);
+    }).toList();
+  }
+
+  List<Eintrag> search(String term) {
+    return data.where((e) {
+      String all =
+          (e.bezeichnung + e.inventarnummer + e.beschreibung).toLowerCase();
+      return all.contains(term);
+    }).toList();
   }
 
   Eintrag getEintrayByInventarnummer(String inventarnummer) {

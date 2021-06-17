@@ -21,17 +21,95 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
     super.initState();
     callbacks = [
       () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => KatalogScreen()));
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => KatalogScreen(
+              kategorie: 0,
+            ),
+          ),
+        );
       },
-      () {},
-      () {},
-      () {},
-      () {},
-      () {},
-      () {},
-      () {},
-      () {},
+      () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => KatalogScreen(
+              kategorie: 1,
+            ),
+          ),
+        );
+      },
+      () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => KatalogScreen(
+              kategorie: 2,
+            ),
+          ),
+        );
+      },
+      () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => KatalogScreen(
+              kategorie: 3,
+            ),
+          ),
+        );
+      },
+      () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => KatalogScreen(
+              kategorie: 4,
+            ),
+          ),
+        );
+      },
+      () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => KatalogScreen(
+              kategorie: 5,
+            ),
+          ),
+        );
+      },
+      () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => KatalogScreen(
+              kategorie: 6,
+            ),
+          ),
+        );
+      },
+      () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => KatalogScreen(
+              kategorie: 7,
+            ),
+          ),
+        );
+      },
+      () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => KatalogScreen(
+              kategorie: 8,
+            ),
+          ),
+        );
+      },
+      () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => KatalogScreen(
+              kategorie: 9,
+            ),
+          ),
+        );
+      },
     ];
   }
 
