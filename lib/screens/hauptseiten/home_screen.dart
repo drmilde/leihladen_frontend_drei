@@ -22,8 +22,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildContent() {;
-
+  Widget _buildContent() {
     return Scaffold(
       endDrawer: AppDrawerWidget(),
       body: CustomScrollView(
@@ -70,9 +69,9 @@ class HomeScreen extends StatelessWidget {
           width: 500,
           decoration: BoxDecoration(
               image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(config.getLagerImageUrl()),
-              )),
+            fit: BoxFit.cover,
+            image: NetworkImage(config.getLagerImageUrl()),
+          )),
         ),
       );
     }

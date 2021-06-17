@@ -5,11 +5,12 @@ class AppDrawerEntryWidget extends StatelessWidget {
   String _assetName;
   Widget _screen;
   bool replace = true;
+  bool showIcon = true;
 
   //VoidCallback _callback;
 
   AppDrawerEntryWidget(this._text, this._assetName, this._screen,
-      {this.replace = false});
+      {this.replace = false, this.showIcon = true});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,8 @@ class AppDrawerEntryWidget extends StatelessWidget {
         leading: Container(
           height: 32,
           width: 32,
-          child: Image.asset(_assetName),
+          //child: Image.asset(_assetName),
+          child: showIcon? Image.network(_assetName): Container(),
         ),
       ),
     );

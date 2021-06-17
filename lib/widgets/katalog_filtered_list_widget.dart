@@ -4,6 +4,7 @@ import 'package:leihladen_frontend_drei/config/screens/katalog_screen_config.dar
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
 import 'package:leihladen_frontend_drei/katalog/katalog.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:leihladen_frontend_drei/screens/katalog/katalog_detail_screen.dart';
 
 class KatalogFilteredListWidget extends StatefulWidget {
   int kategorie = 0;
@@ -112,7 +113,6 @@ class _KatalogFilteredListWidgetState extends State<KatalogFilteredListWidget> {
     return filtered;
   }
 
-
   Widget _createAlphabetHeader(String alphabet) {
     return Container(
       width: double.infinity,
@@ -186,7 +186,7 @@ class _KatalogFilteredListWidgetState extends State<KatalogFilteredListWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 entry.bezeichnung,
                 textAlign: TextAlign.center,
@@ -197,27 +197,35 @@ class _KatalogFilteredListWidgetState extends State<KatalogFilteredListWidget> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Container(
-                height: 240,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        config.getKatalogImageUrl(entry.bilder[0])),
-                    fit: BoxFit.cover,
-                  ),
-                  color: Colors.black12,
-                  gradient: new LinearGradient(
-                    colors: [Colors.black12, Colors.white],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                  border: new Border.all(
-                      color: Colors.black12,
-                      width: 1.0,
-                      style: BorderStyle.solid),
-                  borderRadius: new BorderRadius.only(
-                    topLeft: new Radius.circular(20.0),
-                    topRight: new Radius.circular(20.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => KatalogDetailScreen(
+                           entry: entry,
+                          )));
+                },
+                child: Container(
+                  height: 240,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          config.getKatalogImageUrl(entry.bilder[0])),
+                      fit: BoxFit.cover,
+                    ),
+                    color: Colors.black12,
+                    gradient: new LinearGradient(
+                      colors: [Colors.black12, Colors.white],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                    border: new Border.all(
+                        color: Colors.black12,
+                        width: 1.0,
+                        style: BorderStyle.solid),
+                    borderRadius: new BorderRadius.only(
+                      topLeft: new Radius.circular(20.0),
+                      topRight: new Radius.circular(20.0),
+                    ),
                   ),
                 ),
               ),
