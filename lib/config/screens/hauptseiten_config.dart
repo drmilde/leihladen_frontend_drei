@@ -23,6 +23,10 @@ class HauptseitenConfig {
     return ColorConfig.fromHex(DataModel.config.colorConfig.PrimaryColor);
   }
 
+  Color getPrimaryColorDark() {
+    return ColorConfig.fromHex(DataModel.config.colorConfig.PrimaryColorDark);
+  }
+
   String getHeaderImageUrl() {
     String value = getScreenVal("/content/image/header");
 

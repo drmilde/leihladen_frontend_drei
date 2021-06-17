@@ -17,7 +17,7 @@ class SearchWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   onChanged: (value) {
-                    callback!(value);
+                    callback!(value.trim());
                   },
                   controller: _controllerSuchbegriff,
                   keyboardType: TextInputType.text,

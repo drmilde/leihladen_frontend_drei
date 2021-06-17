@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leihladen_frontend_drei/config/screens/bottom_navigation_bar_widget_config.dart';
 import 'package:leihladen_frontend_drei/screens/hauptseiten/haupt_seite_screen.dart';
 import 'package:leihladen_frontend_drei/screens/hauptseiten/home_screen.dart';
 
@@ -15,16 +16,19 @@ class BottomNavigationBarWidget extends StatefulWidget {
 }
 
 class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
+  BottomNavigationBarWidgetConfig config = BottomNavigationBarWidgetConfig();
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: widget.currentIndex,
       selectedIconTheme: IconThemeData(
-        color: Theme.of(context).primaryColorDark,
+        //color: Theme.of(context).primaryColorDark,
+        color: config.getPrimaryColorDark(),
         size: 30,
       ),
-      selectedItemColor: Theme.of(context).primaryColorDark,
+      selectedItemColor: config.getPrimaryColorDark(),
       onTap: (int index) {
         setState(() {
           widget.currentIndex = index;
