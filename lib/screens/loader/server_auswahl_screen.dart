@@ -47,7 +47,7 @@ class ServerAuswahlScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
                       child: Text(
-                        "Leihladen auswählen",
+                        "Herzlich Willkommen in der Leihladen-App",
                         style: GoogleFonts.nunito(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class ServerAuswahlScreen extends StatelessWidget {
                   ),
                   Text(
                     "Hier finden Sie die Liste der Leihläden, die"
-                    " Sie aktuell mit der Leihladen-Fulda-App nutzen können."
+                    " Sie aktuell mit der Leihladen-App nutzen können."
                     " Bitte wählen Sie Ihren Favoriten aus. Viel Spass beim"
                     " Stöbern in den Katalogen.",
                     style: GoogleFonts.nunito(
@@ -90,6 +90,9 @@ class ServerAuswahlScreen extends StatelessWidget {
             onTap: () {
               print(bootServer);
               Navigator.of(context).push(MaterialPageRoute(
+                  settings: RouteSettings(
+                    name: "ServerAuswahlScreen",
+                  ),
                   builder: (context) => DataLoaderScreen(
                         dataServer: serverliste.server[index].server,
                         dataPort: serverliste.server[index].port,
@@ -158,7 +161,6 @@ class ServerAuswahlScreen extends StatelessWidget {
                         textAlign: TextAlign.justify,
                       ),
                     ),
-
                     SizedBox(
                       height: 16,
                     ),

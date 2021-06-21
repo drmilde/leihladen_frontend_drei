@@ -8,11 +8,18 @@ class HauptseitenConfig {
   String iconsDir = DataModel.config.netzwerkConfig.iconsDir;
   String imageDir = DataModel.config.netzwerkConfig.imageDir;
   String headerDir = DataModel.config.netzwerkConfig.headerDir;
+  String startDir = DataModel.config.netzwerkConfig.startDir;
   String basicUrl = DataModel.config.netzwerkConfig.getBasicUrl();
 
   String getKatalogImageUrl(String name) {
     return "${basicUrl}${imageDir}${name}";
   }
+
+  String getStartImageUrl(int index) {
+    String value = getScreenVal("/content/image/logo${index}");
+    return "${basicUrl}${startDir}${value}";
+  }
+
 
   String getTeamImageUrl() {
     String value = getScreenVal("/content/image/team");

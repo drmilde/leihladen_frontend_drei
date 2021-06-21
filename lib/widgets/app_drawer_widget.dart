@@ -62,11 +62,24 @@ class AppDrawerWidget extends StatelessWidget {
               //"Informationen zum Bürgerzentrum",
               config.getKachelText(2),
               //"assets/images/symbol/home_symbol.png",
-              config.getKachelIcon(2),
+              config.getKachelIcon(1),
               //InfoScreen(),
               StartScreen(),
               replace: false,
             ),
+
+            AppDrawerEntryWidget(
+              //"zum StartScreen",
+              config.getKachelText(11),
+              //"assets/images/symbol/home_symbol.png",
+              config.getKachelIcon(11),
+              //InfoScreen(),
+              StartScreen(),
+              replace: false,
+              screenName: "ServerAuswahlScreen",
+            ),
+
+
             Divider(thickness: 2),
             AppDrawerEntryWidget(
               //"Ihr Leihausweis",
