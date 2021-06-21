@@ -86,54 +86,37 @@ class KatalogDetailScreen extends StatelessWidget {
             ),
           ),
           SliverToBoxAdapter(
+            child: _buildBeschreibung(entry.beschreibung),
+          ),
+          SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  _buildRow("Bezeichnung", entry.bezeichnung),
-                  SizedBox(
-                    height: 16,
+                  _buildRow(
+                    "Bezeichnung",
+                    entry.bezeichnung,
+                    greyBackground: true,
                   ),
-                  _buildRow("Beschreibung", entry.beschreibung),
-                  SizedBox(
-                    height: 16,
-                  ),
+                  _smallVerticalGap(),
                   _buildRow("Inventarnummer", entry.inventarnummer),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  _smallVerticalGap(),
                   _buildRow("Dimension", entry.dimension),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  _smallVerticalGap(),
                   _buildRow("Gewicht", entry.gewicht),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  _smallVerticalGap(),
                   _buildRow("Hersteller", entry.hersteller),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  _smallVerticalGap(),
                   _buildRow("Kaution", entry.kaution),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  _smallVerticalGap(),
                   _buildRow("Kosten", entry.kosten),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  _smallVerticalGap(),
                   _buildRow("Kleinteil", entry.kleinteil),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  _smallVerticalGap(),
                   _buildRow("Lieferant", entry.lieferantenname),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  _smallVerticalGap(),
                   _buildRow("Aktivdatum", entry.aktivdatum),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  _smallVerticalGap(),
                   _buildRow("Typ", entry.typ),
                 ],
               ),
@@ -144,28 +127,76 @@ class KatalogDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRow(String caption, String text, {double width = 200}) {
+  SizedBox _smallVerticalGap() {
+    return SizedBox(
+      height: 8,
+    );
+  }
+
+  Widget _buildBeschreibung(String beschreibung) {
     double fontSize = 14;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          caption,
-          style: GoogleFonts.nunito(
-              fontSize: fontSize, fontWeight: FontWeight.bold),
-        ),
-        Container(
-          width: width,
-          child: Text(
-            text,
-            textAlign: TextAlign.justify,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Beschreibung",
             style: GoogleFonts.nunito(
-              fontSize: fontSize,
+                fontSize: fontSize, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Container(
+            //width: width,
+            child: Text(
+              beschreibung,
+              textAlign: TextAlign.justify,
+              style: GoogleFonts.nunito(
+                fontSize: fontSize,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRow(
+    String caption,
+    String text, {
+    double width = 200,
+    bool greyBackground = false,
+  }) {
+    double fontSize = 14;
+    return Container(
+      color: greyBackground ? Colors.black12 : Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            caption,
+            style: GoogleFonts.nunito(
+                fontSize: fontSize, fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Container(
+              width: width,
+              child: Text(
+                (text == "") ? "--" : text,
+                textAlign: TextAlign.justify,
+                style: GoogleFonts.nunito(
+                  fontSize: fontSize,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
