@@ -20,14 +20,14 @@ class JsonLoader {
 
   Future<ServerListe> loadUncompressedServerListe(
       {String serverListeFileName = "servers.json"}) async {
-    String jsonString = await _fetchUncompressedServerliste(serverListeFileName);
+    String jsonString =
+        await _fetchUncompressedServerliste(serverListeFileName);
     jsonString = jsonString.trim();
 
     return serverlisteFromJson(jsonString);
   }
 
   Future<String> _fetchUncompressedServerliste(String fileName) async {
-    print("Lade die Serverliste");
     Response response = await get(
         Uri.http("localhost:80", "/data/config/leihladenfulda/${fileName}"));
 
@@ -35,12 +35,15 @@ class JsonLoader {
     return result;
   }
 
-
   // CONFIG LOADIND
 
-  Future<Config> loadUncompressedConfigFromServer(
-      {String configFileName = "config.json"}) async {
-    String jsonString = await _fetchUncompressedFromServer(configFileName);
+  Future<Config> loadUncompressedConfigFromServer({
+    String configServer = "",
+    String configPort = "",
+    String configFileName = "config.json",
+  }) async {
+    String jsonString =
+        await _fetchUncompressedFromServer(fileName: configFileName);
     jsonString = jsonString.trim();
 
     return configFromJson(jsonString);
@@ -49,16 +52,22 @@ class JsonLoader {
   // CATALOG LOADING
 
   Future<Katalog> loadUncompressedCatalogDataFromServer(
-      {String katalogFileName = "katalog.json"}) async {
-    String jsonString = await _fetchUncompressedFromServer(katalogFileName);
+      {String configServer = "",
+      String configPort = "",
+      String katalogFileName = "katalog.json"}) async {
+    String jsonString =
+        await _fetchUncompressedFromServer(fileName: katalogFileName);
     jsonString = jsonString.trim();
     return katalogFromJson(jsonString);
   }
 
-
   // HELPER LOADING
 
-  Future<String> _fetchUncompressedFromServer(String fileName) async {
+  Future<String> _fetchUncompressedFromServer({
+    String configServer = "",
+    String configPort = "",
+    String fileName = "",
+  }) async {
     print("${com.serverName}:${com.port}  ...  ${rootDir}${fileName}");
     Response response = await get(
         Uri.http("${com.serverName}:${com.port}", "${rootDir}${fileName}"));

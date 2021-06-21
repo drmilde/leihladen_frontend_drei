@@ -6,12 +6,15 @@ import 'package:leihladen_frontend_drei/model/json_loader.dart';
 import 'package:leihladen_frontend_drei/screens/start_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 
-class LoaderScreen extends StatefulWidget {
+class DataLoaderScreen extends StatefulWidget {
+  String configServer = "";
+  String configPort = "";
+
   @override
-  _LoaderScreenState createState() => _LoaderScreenState();
+  _DataLoaderScreenState createState() => _DataLoaderScreenState();
 }
 
-class _LoaderScreenState extends State<LoaderScreen> {
+class _DataLoaderScreenState extends State<DataLoaderScreen> {
   Future<bool> loadConfigAndCatalog() async {
     // 2. Config laden
     JsonLoader loader = new JsonLoader();

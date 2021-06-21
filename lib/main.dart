@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/color_config.dart';
 import 'package:leihladen_frontend_drei/screens/loader/boot_loader_screen.dart';
-import 'screens/loader/loader_screen.dart';
+import 'screens/loader/data_loader_screen.dart';
 
 void main() {
   runApp(MyApp());

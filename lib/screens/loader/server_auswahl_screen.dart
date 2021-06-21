@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/servers/server_liste.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
-import 'package:leihladen_frontend_drei/screens/loader/loader_screen.dart';
+import 'package:leihladen_frontend_drei/screens/loader/data_loader_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 
 class ServerAuswahlScreen extends StatelessWidget {
@@ -43,14 +43,29 @@ class ServerAuswahlScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Text(
+                        "Leihladen auswählen",
+                        style: GoogleFonts.nunito(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
                   Text(
-                      "Hier finden Sie die Liste der Leihläden, die"
-                      " Sie aktuell mit der Leihladen-Fulda-App nutzen können."
-                      " Bitte wählen Sie Ihren Favoriten aus. Viel Spass beim"
-                      " Stöbern in den Katalogen.",
-                      style: GoogleFonts.nunito(
-                        fontSize: 18,
-                      )),
+                    "Hier finden Sie die Liste der Leihläden, die"
+                    " Sie aktuell mit der Leihladen-Fulda-App nutzen können."
+                    " Bitte wählen Sie Ihren Favoriten aus. Viel Spass beim"
+                    " Stöbern in den Katalogen.",
+                    style: GoogleFonts.nunito(
+                      fontSize: 18,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
                   SizedBox(
                     height: 32,
                   ),
@@ -75,7 +90,7 @@ class ServerAuswahlScreen extends StatelessWidget {
             onTap: () {
               print(bootServer);
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => LoaderScreen()));
+                  MaterialPageRoute(builder: (context) => DataLoaderScreen()));
             },
             child: _buildCard(imagUlr, index),
           );
