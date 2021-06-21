@@ -58,15 +58,6 @@ class AppDrawerWidget extends StatelessWidget {
             AppDrawerEntryWidget("Einführung in die App",
                 "assets/images/symbol/info_symbol.png", MitmachenScreen()),
              */
-            AppDrawerEntryWidget(
-              //"Informationen zum Bürgerzentrum",
-              config.getKachelText(2),
-              //"assets/images/symbol/home_symbol.png",
-              config.getKachelIcon(1),
-              //InfoScreen(),
-              StartScreen(),
-              replace: false,
-            ),
 
             AppDrawerEntryWidget(
               //"zum StartScreen",
@@ -79,6 +70,15 @@ class AppDrawerWidget extends StatelessWidget {
               screenName: "ServerAuswahlScreen",
             ),
 
+            AppDrawerEntryWidget(
+              //"Informationen zum Bürgerzentrum",
+              config.getKachelText(2),
+              //"assets/images/symbol/home_symbol.png",
+              config.getKachelIcon(1),
+              //InfoScreen(),
+              StartScreen(),
+              replace: false,
+            ),
 
             Divider(thickness: 2),
             AppDrawerEntryWidget(

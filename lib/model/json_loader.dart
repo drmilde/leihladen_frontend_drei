@@ -9,6 +9,10 @@ import '../katalog/katalog.dart';
 
 class JsonLoader {
   late Communication com;
+
+  String bootServerPort = "localhost:80";
+  String bootServerDir = "/data/config/leihladenfulda/";
+
   String rootDir = "/data/config/leihladenfulda/";
   String katalogName = "katalog.json";
   String configName = "config.json";
@@ -30,7 +34,7 @@ class JsonLoader {
 
   Future<String> _fetchUncompressedServerliste(String fileName) async {
     Response response = await get(
-        Uri.http("localhost:80", "/data/config/leihladenfulda/${fileName}"));
+        Uri.http(bootServerPort, "${bootServerDir}${fileName}"));
 
     String result = utf8.decode(response.bodyBytes, allowMalformed: true);
     return result;
