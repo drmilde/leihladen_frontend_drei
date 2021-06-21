@@ -41,19 +41,19 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           title: Text("Home"),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.store),
+          icon: Icon(Icons.store_outlined),
           title: Text("Auswählen"),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.directions_run),
+          icon: Icon(Icons.directions_run_outlined),
           title: Text("Ausleihen"),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.map_outlined),
           title: Text("Abholen"),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.group),
+          icon: Icon(Icons.group_outlined),
           title: Text("Mitmachen"),
         ),
       ],

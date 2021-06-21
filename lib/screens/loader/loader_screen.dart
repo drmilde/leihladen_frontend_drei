@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/config.dart';
-import 'package:leihladen_frontend_drei/config/persistence.dart';
-import 'package:leihladen_frontend_drei/config/store.dart';
 import 'package:leihladen_frontend_drei/katalog/katalog.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
 import 'package:leihladen_frontend_drei/model/json_loader.dart';
@@ -14,21 +12,7 @@ class LoaderScreen extends StatefulWidget {
 }
 
 class _LoaderScreenState extends State<LoaderScreen> {
-  Future<bool> loadConfigAndStore() async {
-    // 1. Store laden, bzw initialisieren
-    String jsonString = await Persistence.load();
-    jsonString = jsonString.trim();
-    print("Storedaten... '${jsonString}'");
-    if (jsonString != "") {
-      Store s = storeFromJson(jsonString);
-      DataModel.store = s;
-    } else {
-      Store s = Store.init();
-      DataModel.store = s;
-      bool saved = await Persistence.store(storeToJson(s));
-      print("Store ist leer ... wurde initialisiert und persistiert");
-    }
-
+  Future<bool> loadConfigAndCatalog() async {
     // 2. Config laden
     JsonLoader loader = new JsonLoader();
     Config config = await loader.loadUncompressedConfigFromServer();
@@ -56,7 +40,7 @@ class _LoaderScreenState extends State<LoaderScreen> {
       fab: Container(),
       showFab: false,
       body: FutureBuilder(
-        future: loadConfigAndStore(),
+        future: loadConfigAndCatalog(),
         // a previously-obtained Future<String> or null
         builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
           // Fall 1: keine Daten geladen

@@ -4,6 +4,9 @@
 
 import 'dart:convert';
 
+import 'package:leihladen_frontend_drei/config/servers/server_liste.dart';
+import 'package:leihladen_frontend_drei/model/data_model.dart';
+
 Store storeFromJson(String str) => Store.fromJson(json.decode(str));
 
 String storeToJson(Store data) => json.encode(data.toJson());
@@ -25,12 +28,14 @@ class Store {
   late String stand;
   late Warenkorb warenkorb;
   late Leihausweis leihausweis;
+  late ServerListe serverliste;
 
   Store({
     required this.version,
     required this.stand,
     required this.warenkorb,
     required this.leihausweis,
+    required this.serverliste,
   });
 
   Store.init() {
@@ -48,6 +53,7 @@ class Store {
     this.warenkorb = Warenkorb(
       data: [],
     );
+    this.serverliste = ServerListe.init();
   }
 
   factory Store.fromJson(Map<String, dynamic> json) => Store(
@@ -55,6 +61,7 @@ class Store {
         stand: json["stand"],
         warenkorb: Warenkorb.fromJson(json["warenkorb"]),
         leihausweis: Leihausweis.fromJson(json["leihausweis"]),
+        serverliste: ServerListe.fromJson(json["serverliste"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -62,6 +69,7 @@ class Store {
         "stand": stand,
         "warenkorb": warenkorb.toJson(),
         "leihausweis": leihausweis.toJson(),
+        "serverliste": serverliste.toJson(),
       };
 }
 
