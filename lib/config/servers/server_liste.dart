@@ -41,6 +41,7 @@ class ServerListe {
       catalogversion: "v0",
       server: "h2834086.stratoserver.net",
       port: "8080",
+      prepath: "",
       secured: "nein",
     );
 
@@ -79,6 +80,7 @@ class Server {
     this.catalogversion = "",
     this.server = "",
     this.port = "",
+    this.prepath = "",
     this.secured = "",
   });
 
@@ -94,6 +96,7 @@ class Server {
   String catalogversion;
   String server;
   String port;
+  String prepath;
   String secured;
 
   factory Server.fromJson(Map<String, dynamic> json) => Server(
@@ -109,6 +112,7 @@ class Server {
         catalogversion: json["catalogversion"],
         server: json["server"],
         port: json["port"],
+        prepath: json["prepath"],
         secured: json["secured"],
       );
 
@@ -125,6 +129,7 @@ class Server {
         "catalogversion": catalogversion,
         "server": server,
         "port": port,
+        "prepath": prepath,
         "secured": secured,
       };
 }

@@ -89,8 +89,13 @@ class ServerAuswahlScreen extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               print(bootServer);
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => DataLoaderScreen()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => DataLoaderScreen(
+                        dataServer: serverliste.server[index].server,
+                        dataPort: serverliste.server[index].port,
+                        dataPrepath: serverliste.server[index].prepath,
+                        dataDir: "/data/config/leihladenfulda/",
+                      )));
             },
             child: _buildCard(imagUlr, index),
           );
@@ -153,6 +158,13 @@ class ServerAuswahlScreen extends StatelessWidget {
                         textAlign: TextAlign.justify,
                       ),
                     ),
+
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text("Dataserver: ${serverliste.server[index].server}"),
+                    Text("Dataport: ${serverliste.server[index].port}"),
+                    Text("Dataprepath: ${serverliste.server[index].prepath}"),
                     /*
                         Text(serverliste.server[index].logo),
                         Text(serverliste.server[index].protokoll),

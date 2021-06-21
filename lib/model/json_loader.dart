@@ -4,6 +4,7 @@ import 'package:http/http.dart';
 import 'package:leihladen_frontend_drei/config/config.dart';
 import 'package:leihladen_frontend_drei/config/servers/server_liste.dart';
 import 'package:leihladen_frontend_drei/messaging/communication.dart';
+
 import '../katalog/katalog.dart';
 
 class JsonLoader {
@@ -35,15 +36,21 @@ class JsonLoader {
     return result;
   }
 
-  // CONFIG LOADIND
+  // CONFIG LOADING
 
   Future<Config> loadUncompressedConfigFromServer({
-    String configServer = "",
-    String configPort = "",
+    String dataServer = "",
+    String dataPort = "",
+    String dataPrepath = "",
+    String dataDir = "",
     String configFileName = "config.json",
   }) async {
-    String jsonString =
-        await _fetchUncompressedFromServer(fileName: configFileName);
+    String jsonString = await _fetchUncompressedFromServer(
+        dataServer: dataServer,
+        dataPort: dataPort,
+        dataPrepath: dataPrepath,
+        dataDir: dataDir,
+        fileName: configFileName);
     jsonString = jsonString.trim();
 
     return configFromJson(jsonString);
@@ -52,11 +59,17 @@ class JsonLoader {
   // CATALOG LOADING
 
   Future<Katalog> loadUncompressedCatalogDataFromServer(
-      {String configServer = "",
-      String configPort = "",
-      String katalogFileName = "katalog.json"}) async {
-    String jsonString =
-        await _fetchUncompressedFromServer(fileName: katalogFileName);
+      {String dataServer = "",
+      String dataPort = "",
+      String dataPrepath = "",
+      String dataDir = "",
+      String catalogFileName = "katalog.json"}) async {
+    String jsonString = await _fetchUncompressedFromServer(
+        dataServer: dataServer,
+        dataPort: dataPort,
+        dataPrepath: dataPrepath,
+        dataDir: dataDir,
+        fileName: catalogFileName);
     jsonString = jsonString.trim();
     return katalogFromJson(jsonString);
   }
@@ -64,13 +77,21 @@ class JsonLoader {
   // HELPER LOADING
 
   Future<String> _fetchUncompressedFromServer({
-    String configServer = "",
-    String configPort = "",
+    String dataServer = "",
+    String dataPort = "",
+    String dataPrepath = "",
+    String dataDir = "",
     String fileName = "",
   }) async {
-    print("${com.serverName}:${com.port}  ...  ${rootDir}${fileName}");
+    print(
+        "Fetching data from DataServer ${dataServer}:${dataPort}${dataPrepath}  ...  ${dataDir}${fileName}");
+    /*
     Response response = await get(
         Uri.http("${com.serverName}:${com.port}", "${rootDir}${fileName}"));
+
+     */
+    Response response = await get(
+        Uri.http("${dataServer}:${dataPort}${dataPrepath}", "${dataDir}${fileName}"));
 
     String result = utf8.decode(response.bodyBytes, allowMalformed: true);
     return result;

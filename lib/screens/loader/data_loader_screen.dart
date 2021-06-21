@@ -7,8 +7,17 @@ import 'package:leihladen_frontend_drei/screens/start_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 
 class DataLoaderScreen extends StatefulWidget {
-  String configServer = "";
-  String configPort = "";
+  String dataServer = "";
+  String dataPort = "";
+  String dataPrepath = "";
+  String dataDir = "";
+
+  DataLoaderScreen({
+    required this.dataServer,
+    required this.dataPort,
+    required this.dataPrepath,
+    required this.dataDir,
+  });
 
   @override
   _DataLoaderScreenState createState() => _DataLoaderScreenState();
@@ -18,11 +27,23 @@ class _DataLoaderScreenState extends State<DataLoaderScreen> {
   Future<bool> loadConfigAndCatalog() async {
     // 2. Config laden
     JsonLoader loader = new JsonLoader();
-    Config config = await loader.loadUncompressedConfigFromServer();
+    Config config = await loader.loadUncompressedConfigFromServer(
+      dataServer: widget.dataServer,
+      dataPort: widget.dataPort,
+      dataPrepath: widget.dataPrepath,
+      dataDir: widget.dataDir,
+      configFileName: "config.json",
+    );
     DataModel.setConfig(config);
 
     // 3. load the katalog
-    Katalog catalog = await loader.loadUncompressedCatalogDataFromServer();
+    Katalog catalog = await loader.loadUncompressedCatalogDataFromServer(
+      dataServer: widget.dataServer,
+      dataPort: widget.dataPort,
+      dataPrepath: widget.dataPrepath,
+      dataDir: widget.dataDir,
+      catalogFileName: "katalog.json",
+    );
     DataModel.katalog = catalog;
 
     return true;
