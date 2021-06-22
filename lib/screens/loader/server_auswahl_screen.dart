@@ -7,9 +7,9 @@ import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 
 class ServerAuswahlScreen extends StatelessWidget {
   ServerListe serverliste = ServerListe.init();
-  String bootServer = "localhost";
+  String bootServer = "medsrv.informatik.hs-fulda.de";
   String bootPort = "80";
-  String bootDir = "/data/config/leihladenfulda/boot/";
+  String bootDir = "/leihladenapp/data/config/leihladenfulda/boot/";
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +34,14 @@ class ServerAuswahlScreen extends StatelessWidget {
           if (!snapshot.hasData) {
             return Container(
               color: Colors.blue,
+              child: Center(
+                child: Text(
+                  "select server ...",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ),
             );
           } else {
             // Fall 3: Daten wurden geladen und können angezeigt werden

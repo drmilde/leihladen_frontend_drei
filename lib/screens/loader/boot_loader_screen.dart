@@ -62,6 +62,14 @@ class _BootLoaderScreenState extends State<BootLoaderScreen> {
           if (!snapshot.hasData) {
             return Container(
               color: Colors.blue,
+                child: Center(
+                  child: Text(
+                    "boot loader ....",
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                )
             );
           } else {
             // Fall 3: Daten wurden geladen und können angezeigt werden

@@ -17,7 +17,9 @@ class DataLoaderScreen extends StatefulWidget {
     required this.dataPort,
     required this.dataPrepath,
     required this.dataDir,
-  });
+  }) {
+   DataModel.prePath = this.dataPrepath;
+  }
 
   @override
   _DataLoaderScreenState createState() => _DataLoaderScreenState();

@@ -1,3 +1,5 @@
+import 'package:leihladen_frontend_drei/model/data_model.dart';
+
 class NetzwerkConfig {
   NetzwerkConfig({
     this.server = "",
@@ -60,6 +62,6 @@ class NetzwerkConfig {
 
   // Helper
   String getBasicUrl() {
-    return "http://${server}:${port}${rootDir}";
+    return "http://${server}:${port}${DataModel.prePath}${rootDir}";
   }
 }

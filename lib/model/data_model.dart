@@ -14,6 +14,7 @@ class DataModel {
   static JsonLoader loader = new JsonLoader();
   static int katalogZugriffCount = 0;
   static int serverListeZugriffCount = 0;
+  static String prePath = "";
 
   DataModel() {
     store = Store.init();

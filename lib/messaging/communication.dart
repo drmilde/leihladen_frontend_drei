@@ -1,4 +1,5 @@
 import 'package:http/http.dart';
+import 'package:leihladen_frontend_drei/model/data_model.dart';
 
 class Communication {
   // http://medsrv.informatik.hs-fulda.de:12345/data/config/leihladenfulda/
@@ -12,13 +13,12 @@ class Communication {
     return "http";
   }
 
-  String get nginxName {
-    return '';
-    return '/campusviertel/';
+  String get prePath {
+    return DataModel.prePath;
   }
 
   String get serverPort {
-    return "${serverName}:${port}${nginxName}";
+    return "${serverName}:${port}";
   }
 
   String get serverName {
@@ -36,7 +36,8 @@ class Communication {
 
   Future<String> makeGetRequest(String url, String path) async {
     // make GET request
-    var uri = Uri.http(url, path);
+    print ("$url $prePath $path");
+    var uri = Uri.http(url, prePath + path);
     Response response = await get(uri);
 
     // int statusCode = response.statusCode;

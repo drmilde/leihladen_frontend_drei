@@ -10,8 +10,36 @@ import '../katalog/katalog.dart';
 class JsonLoader {
   late Communication com;
 
-  String bootServerPort = "localhost:80";
-  String bootServerDir = "/data/config/leihladenfulda/";
+  String content = '''
+  {
+   "stand":"21.6.2021",
+   "version":"1.0",
+   "description":"Liste der aktuellen Leihladenserver",
+   "server":[
+      {
+         "name":"Der Gartenladen",
+         "desc":"Der Gartenladen ist der Beispielalden. Grün und hübsch.",
+         "logo":"logo_gartenladen.png",
+         "protokoll":"v2",
+         "config":"config.json",
+         "configformat":"uncompressed",
+         "configversion":"v0",
+         "catalog":"katalog.json",
+         "catalogformat":"uncompressed",
+         "catalogversion":"v1",
+         "server":"medsrv.informatik.hs-fulda.de",
+         "port":"80",
+         "prepath":"/gartenladen/",
+         "secured":"nein"
+      }
+   ]
+}
+  ''';
+
+  //"http://medsrv.informatik.hs-fulda.de/leihladenapp/data/config/leihladenfulda/servers.json"
+
+  String bootServerPort = "medsrv.informatik.hs-fulda.de:80";
+  String bootServerDir = "/leihladenapp/data/config/leihladenfulda/";
 
   String rootDir = "/data/config/leihladenfulda/";
   String katalogName = "katalog.json";
@@ -33,10 +61,12 @@ class JsonLoader {
   }
 
   Future<String> _fetchUncompressedServerliste(String fileName) async {
+    //return content;
     Response response = await get(
         Uri.http(bootServerPort, "${bootServerDir}${fileName}"));
 
     String result = utf8.decode(response.bodyBytes, allowMalformed: true);
+
     return result;
   }
 
@@ -88,16 +118,17 @@ class JsonLoader {
     String fileName = "",
   }) async {
     print(
-        "Fetching data from DataServer ${dataServer}:${dataPort}${dataPrepath}  ...  ${dataDir}${fileName}");
+        "Fetching data from DataServer ${dataServer}:${dataPort}  ...  ${dataPrepath}${dataDir}${fileName}");
     /*
     Response response = await get(
         Uri.http("${com.serverName}:${com.port}", "${rootDir}${fileName}"));
 
      */
     Response response = await get(
-        Uri.http("${dataServer}:${dataPort}${dataPrepath}", "${dataDir}${fileName}"));
+        Uri.http("${dataServer}:${dataPort}", "${dataPrepath}${dataDir}${fileName}"));
 
     String result = utf8.decode(response.bodyBytes, allowMalformed: true);
+    //print(result);
     return result;
   }
 
