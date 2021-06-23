@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/screens/app_drawer_widget_config.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:leihladen_frontend_drei/screens/abholen/laden_info_screen.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/entliehen_screen.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/leihausweis_screen.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/reservierung_screen.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/warenkorb_screen.dart';
+import 'package:leihladen_frontend_drei/screens/info/impressum_screen.dart';
+import 'package:leihladen_frontend_drei/screens/info/system_information_screen.dart';
 import 'package:leihladen_frontend_drei/screens/start_screen.dart';
 
 import 'app_drawer_entry_widget.dart';
@@ -76,7 +82,7 @@ class AppDrawerWidget extends StatelessWidget {
               //"assets/images/symbol/home_symbol.png",
               config.getKachelIcon(1),
               //InfoScreen(),
-              StartScreen(),
+              LadenInfoScreen(),
               replace: false,
             ),
 
@@ -95,7 +101,7 @@ class AppDrawerWidget extends StatelessWidget {
               config.getKachelText(4),
               config.getKachelIcon(4),
               //WarenkorbScreen(),
-              StartScreen(),
+              WarenkorbScreen(),
               replace: false,
             ),
             AppDrawerEntryWidget(
@@ -104,7 +110,7 @@ class AppDrawerWidget extends StatelessWidget {
               config.getKachelText(5),
               config.getKachelIcon(5),
               //ReservierungScreen(),
-              StartScreen(),
+              ReservierungScreen(),
               replace: false,
             ),
             AppDrawerEntryWidget(
@@ -113,7 +119,7 @@ class AppDrawerWidget extends StatelessWidget {
               config.getKachelText(6),
               config.getKachelIcon(6),
               //EntliehenScreen(),
-              StartScreen(),
+              EntliehenScreen(),
               replace: false,
             ),
             Divider(thickness: 2),
@@ -124,7 +130,7 @@ class AppDrawerWidget extends StatelessWidget {
               config.getKachelText(8),
               config.getKachelIcon(8),
               //SystemInformationScreen(),
-              StartScreen(),
+              SystemInformationScreen(),
               replace: false,
             ),
             Divider(thickness: 2),
@@ -134,7 +140,7 @@ class AppDrawerWidget extends StatelessWidget {
               config.getKachelText(9),
               config.getKachelIcon(9),
               //ImpressumScreen(),
-              StartScreen(),
+              ImpressumScreen(),
               replace: false,
               showIcon: false,
             ),

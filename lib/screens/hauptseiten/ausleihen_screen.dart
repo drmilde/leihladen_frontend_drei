@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/screens/ausleihen_config_screen.dart';
 import 'package:leihladen_frontend_drei/config/store.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/entliehen_screen.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/leihausweis_screen.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/reservierung_screen.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/warenkorb_screen.dart';
 import 'package:leihladen_frontend_drei/screens/katalog/katalog_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/app_drawer_widget.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
@@ -25,9 +28,18 @@ class _AusleihenScreenState extends State<AusleihenScreen> {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => LeihausweisScreen()));
       },
-      () {},
-      () {},
-      () {},
+      () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => WarenkorbScreen()));
+      },
+      () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => ReservierungScreen()));
+      },
+      () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => EntliehenScreen()));
+      },
     ];
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/screens/hauptseiten_config.dart';
+import 'package:leihladen_frontend_drei/screens/abholen/laden_info_screen.dart';
 import 'package:leihladen_frontend_drei/screens/hauptseiten/abholen_screen.dart';
 import 'package:leihladen_frontend_drei/screens/hauptseiten/ausleihen_screen.dart';
 import 'package:leihladen_frontend_drei/screens/hauptseiten/auswaehlen_screen.dart';
@@ -60,7 +61,7 @@ class _HauptSeiteScreenState extends State<HauptSeiteScreen> {
     floatActionButtons[3] = FloatingActionButton(
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => StartScreen()));
+            context, MaterialPageRoute(builder: (context) => LadenInfoScreen()));
       },
       child: Text("Info", style: TextStyle(color: Colors.white)),
       backgroundColor: config.getPrimaryColor(),
