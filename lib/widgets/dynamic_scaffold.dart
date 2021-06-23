@@ -44,11 +44,13 @@ class _DynamicScaffoldState extends State<DynamicScaffold> {
   }
 
   Widget narrowScaffold() {
-    return Scaffold(
-      appBar: widget.showAppbar ? widget.appbar : null,
-      endDrawer: widget.showDrawer ? widget.drawer : null,
-      body: widget.body,
-      floatingActionButton: widget.showFab ? widget.fab : null,
+    return SafeArea(
+      child: Scaffold(
+        appBar: widget.showAppbar ? widget.appbar : null,
+        endDrawer: widget.showDrawer ? widget.drawer : null,
+        body: widget.body,
+        floatingActionButton: widget.showFab ? widget.fab : null,
+      ),
     );
   }
 

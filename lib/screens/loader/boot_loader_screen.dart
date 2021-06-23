@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leihladen_frontend_drei/config/persistence.dart';
 import 'package:leihladen_frontend_drei/config/servers/server_liste.dart';
-import 'package:leihladen_frontend_drei/config/store.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
 import 'package:leihladen_frontend_drei/model/json_loader.dart';
 import 'package:leihladen_frontend_drei/screens/loader/server_auswahl_screen.dart';
@@ -20,25 +18,6 @@ class _BootLoaderScreenState extends State<BootLoaderScreen> {
     ServerListe serverliste = await loader.loadUncompressedServerListe();
     print("Serverliste vom Bootserver geladen");
     DataModel.serverliste = serverliste;
-
-    // 1. Store laden, bzw initialisieren
-    /*
-    String jsonString = await Persistence.load();
-    jsonString = jsonString.trim();
-    print("Storedaten lokal geladen");
-    if (jsonString != "") {
-      Store s = storeFromJson(jsonString);
-      DataModel.store = s;
-      DataModel.store.serverliste = serverliste;
-    } else {
-      Store s = Store.init();
-      DataModel.store = s;
-      bool saved = await Persistence.store(storeToJson(s));
-      print("Store ist leer ... wurde initialisiert und persistiert");
-    }
-
-
-     */
 
     return true;
   }
