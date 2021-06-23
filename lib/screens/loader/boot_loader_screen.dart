@@ -22,6 +22,7 @@ class _BootLoaderScreenState extends State<BootLoaderScreen> {
     DataModel.serverliste = serverliste;
 
     // 1. Store laden, bzw initialisieren
+    /*
     String jsonString = await Persistence.load();
     jsonString = jsonString.trim();
     print("Storedaten lokal geladen");
@@ -35,6 +36,9 @@ class _BootLoaderScreenState extends State<BootLoaderScreen> {
       bool saved = await Persistence.store(storeToJson(s));
       print("Store ist leer ... wurde initialisiert und persistiert");
     }
+
+
+     */
 
     return true;
   }
@@ -61,7 +65,7 @@ class _BootLoaderScreenState extends State<BootLoaderScreen> {
           // Fall 2: Daten werden noch geladen
           if (!snapshot.hasData) {
             return Container(
-              color: Colors.blue,
+                color: Colors.blue,
                 child: Center(
                   child: Text(
                     "boot loader ....",
@@ -69,8 +73,7 @@ class _BootLoaderScreenState extends State<BootLoaderScreen> {
                       fontSize: 20,
                     ),
                   ),
-                )
-            );
+                ));
           } else {
             // Fall 3: Daten wurden geladen und können angezeigt werden
             bool result = snapshot.data as bool;

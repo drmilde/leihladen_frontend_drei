@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/color_config.dart';
+import 'package:leihladen_frontend_drei/model/data_model.dart';
 import 'package:leihladen_frontend_drei/screens/loader/boot_loader_screen.dart';
 import 'screens/loader/data_loader_screen.dart';
 
 void main() {
+  DataModel dm = new DataModel();
   runApp(MyApp());
 }
 
