@@ -5,6 +5,7 @@ import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
 import 'package:leihladen_frontend_drei/katalog/katalog.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
 import 'package:leihladen_frontend_drei/screens/katalog/katalog_detail_screen.dart';
+import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
 class KatalogFilteredListWidget extends StatefulWidget {
   int kategorie = 0;
@@ -148,153 +149,15 @@ class _KatalogFilteredListWidgetState extends State<KatalogFilteredListWidget> {
   }
 
   Widget _verybigCard(Eintrag entry) {
-    return _buildSizedCard(entry, height: 410);
+    return EntryCardWidget(entry, height: 410);
   }
 
   Widget _bigCard(Eintrag entry) {
-    return _buildSizedCard(entry, height: 380);
+    return EntryCardWidget(entry, height: 380);
   }
 
   Widget _smallCard(Eintrag entry) {
-    return _buildSizedCard(entry, height: 360);
-  }
-
-  Widget _buildSizedCard(Eintrag entry, {double height = 340}) {
-    return Center(
-      child: Container(
-        height: height,
-        //width: MediaQuery.of(context).size.width /2,
-        width: 300,
-        decoration: BoxDecoration(
-          color: Colors.black12,
-          gradient: new LinearGradient(
-            colors: [Colors.black12, Colors.white],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          border: new Border.all(
-            color: config.getPrimaryColor(),
-            width: 1.0,
-            style: BorderStyle.solid,
-          ),
-          borderRadius: new BorderRadius.only(
-            topLeft: new Radius.circular(20.0),
-            topRight: new Radius.circular(20.0),
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                entry.bezeichnung,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.nunito(
-                  fontSize: 18,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => KatalogDetailScreen(
-                           entry: entry,
-                          )));
-                },
-                child: Container(
-                  height: 240,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                          config.getKatalogImageUrl(entry.bilder[0])),
-                      fit: BoxFit.cover,
-                    ),
-                    color: Colors.black12,
-                    gradient: new LinearGradient(
-                      colors: [Colors.black12, Colors.white],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                    ),
-                    border: new Border.all(
-                        color: Colors.black12,
-                        width: 1.0,
-                        style: BorderStyle.solid),
-                    borderRadius: new BorderRadius.only(
-                      topLeft: new Radius.circular(20.0),
-                      topRight: new Radius.circular(20.0),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            _WarenkorbRow(),
-            //Text(entry.beschreibung),
-            //Text(entry.inventarnummer),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _WarenkorbRow() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 8,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _buildWarenkorbButton(),
-          Row(
-            children: [
-              Text(
-                "0",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.nunito(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.delete),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildWarenkorbButton() {
-    return Container(
-      width: 100,
-      decoration: BoxDecoration(
-        color: config.getPrimaryColor(),
-        borderRadius: new BorderRadius.only(
-          topRight: new Radius.circular(10.0),
-          bottomRight: new Radius.circular(10.0),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GestureDetector(
-          onTap: () {},
-          child: Text(
-            "Warenkorb +",
-            textAlign: TextAlign.center,
-            style: GoogleFonts.nunito(
-              color: Colors.white,
-              fontSize: 12,
-            ),
-          ),
-        ),
-      ),
-    );
+    return EntryCardWidget(entry, height: 360);
   }
 
   /// external config

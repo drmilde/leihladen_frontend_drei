@@ -3,24 +3,17 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/warenkorb_screen_config.dart';
-import 'package:leihladen_frontend_drei/screens/start_screen.dart';
+import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
+import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/reservierung_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
+import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
 class WarenkorbScreen extends StatelessWidget {
   WarenkorbScreenConfig config = new WarenkorbScreenConfig();
   String title = "Warenkorb";
-  String beschreibung = "Lorem ipsum dolor sit amet, consetetur"
-      " sadipscing elitr, sed diam nonumy eirmod tempor"
-      " invidunt ut labore et dolore magna aliquyam erat,"
-      " sed diam voluptua. At vero eos et accusam et justo"
-      " duo dolores et ea rebum. Stet clita kasd gubergren,"
-      " no sea takimata sanctus est Lorem ipsum dolor sit amet."
-      " Lorem ipsum dolor sit amet, consetetur sadipscing elitr,"
-      " sed diam nonumy eirmod tempor invidunt ut labore et dolore"
-      " magna aliquyam erat, sed diam voluptua. At vero eos et"
-      " accusam et justo duo dolores et ea rebum. Stet clita"
-      " kasd gubergren, no sea takimata sanctus est"
-      " Lorem ipsum dolor sit amet.";
+  String beschreibung = "Der Warenkorb zeigt Ihre ausgwählten Dinge."
+      " Durch Wischen können Sie das Ding entfernen.";
   String imageUrl =
       "http://medsrv.informatik.hs-fulda.de/leihladenapp/data/config/leihladenfulda/boot/nackt.jpg";
   String inventarnummer = "";
@@ -39,10 +32,10 @@ class WarenkorbScreen extends StatelessWidget {
       showAppbar: false,
       fab: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => StartScreen()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ReservierungScreen()));
         },
-        child: Text("W+", style: TextStyle(color: Colors.white)),
+        child: Text("R", style: TextStyle(color: Colors.white)),
         backgroundColor: config.getPrimaryColor(),
       ),
       showFab: true,
@@ -102,14 +95,28 @@ class WarenkorbScreen extends StatelessWidget {
                 ),
               )),
           SliverToBoxAdapter(
-            child: _buildBeschreibung(beschreibung +
-                beschreibung +
-                beschreibung +
-                beschreibung +
-                beschreibung),
+            child: _buildBeschreibung(beschreibung),
           ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return _buildWarenkorbCard(index);
+              },
+              childCount: DataModel.store.warenkorb.data.length,
+            ),
+          )
         ],
       ),
+    );
+  }
+
+  Widget _buildWarenkorbCard(int index) {
+    String inventarnummer = DataModel.store.warenkorb.data[index];
+    Eintrag entry = DataModel.katalog.getEintrayByInventarnummer(inventarnummer);
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: EntryCardWidget(entry),
     );
   }
 
