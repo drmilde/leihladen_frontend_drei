@@ -4,6 +4,7 @@ import 'package:leihladen_frontend_drei/config/screens/katalog_screen_config.dar
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
 import 'package:leihladen_frontend_drei/screens/katalog/katalog_detail_screen.dart';
+import 'package:leihladen_frontend_drei/widgets/animated_button_widget.dart';
 
 class EntryCardWidget extends StatelessWidget {
   KatalogScreenConfig config = new KatalogScreenConfig();
@@ -107,7 +108,13 @@ class EntryCardWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildWarenkorbButton(entry),
+          AnimatedButtonWidget(
+            color: config.getPrimaryColor(),
+            text: "Warenkorb+",
+            callback: () {
+              DataModel.store.warenkorb.addData(entry.inventarnummer);
+            },
+          ),
           Row(
             children: [
               Text(
@@ -120,42 +127,13 @@ class EntryCardWidget extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  // TODO delte from warenkorb
+                  // TODO delete from warenkorb
                 },
                 icon: Icon(Icons.delete),
               ),
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildWarenkorbButton(Eintrag entry) {
-    return Container(
-      width: 100,
-      decoration: BoxDecoration(
-        color: config.getPrimaryColor(),
-        borderRadius: new BorderRadius.only(
-          topRight: new Radius.circular(10.0),
-          bottomRight: new Radius.circular(10.0),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GestureDetector(
-          onTap: () {
-            DataModel.store.warenkorb.addData(entry.inventarnummer);
-          },
-          child: Text(
-            "Warenkorb +",
-            textAlign: TextAlign.center,
-            style: GoogleFonts.nunito(
-              color: Colors.white,
-              fontSize: 12,
-            ),
-          ),
-        ),
       ),
     );
   }

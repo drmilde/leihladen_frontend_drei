@@ -9,16 +9,26 @@ import 'package:leihladen_frontend_drei/screens/ausleihen/reservierung_screen.da
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
-class WarenkorbScreen extends StatelessWidget {
-  WarenkorbScreenConfig config = new WarenkorbScreenConfig();
-  String title = "Warenkorb";
-  String beschreibung = "Der Warenkorb zeigt Ihre ausgwählten Dinge."
-      " Durch Wischen können Sie das Ding entfernen.";
-  String imageUrl =
-      "http://medsrv.informatik.hs-fulda.de/leihladenapp/data/config/leihladenfulda/boot/nackt.jpg";
-  String inventarnummer = "";
+class WarenkorbScreen extends StatefulWidget {
 
   WarenkorbScreen();
+
+  @override
+  _WarenkorbScreenState createState() => _WarenkorbScreenState();
+}
+
+class _WarenkorbScreenState extends State<WarenkorbScreen> {
+  WarenkorbScreenConfig config = new WarenkorbScreenConfig();
+
+  String title = "Warenkorb";
+
+  String beschreibung = "Der Warenkorb zeigt Ihre ausgwählten Dinge."
+      " Durch Wischen können Sie das Ding entfernen.";
+
+  String imageUrl =
+      "http://medsrv.informatik.hs-fulda.de/leihladenapp/data/config/leihladenfulda/boot/nackt.jpg";
+
+  String inventarnummer = "";
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +57,7 @@ class WarenkorbScreen extends StatelessWidget {
     return Scaffold(
       //endDrawer: AppDrawerWidget(),
       body: CustomScrollView(
-        key: key,
+        key: widget.key,
         slivers: [
           SliverAppBar(
               centerTitle: true,
