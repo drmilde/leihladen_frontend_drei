@@ -31,7 +31,7 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
 
     //DataModel.loadStore();
 
-    Leihausweis ausweis = DataModel.store.leihausweis;
+    Leihausweis ausweis = DataModel.store.value.leihausweis;
     _controllerNachname.text = ausweis.nachname;
     _controllerVorname.text = ausweis.vorname;
     _controllerAdresse.text = ausweis.adresse;
@@ -318,14 +318,14 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
   }
 
   void transmitData() {
-    DataModel.store.leihausweis.nachname = _controllerNachname.text.trim();
-    DataModel.store.leihausweis.vorname = _controllerVorname.text.trim();
-    DataModel.store.leihausweis.adresse = _controllerAdresse.text.trim();
-    DataModel.store.leihausweis.mobile = _controllerMobile.text.trim();
-    DataModel.store.leihausweis.geburtsjahr =
+    DataModel.store.value.leihausweis.nachname = _controllerNachname.text.trim();
+    DataModel.store.value.leihausweis.vorname = _controllerVorname.text.trim();
+    DataModel.store.value.leihausweis.adresse = _controllerAdresse.text.trim();
+    DataModel.store.value.leihausweis.mobile = _controllerMobile.text.trim();
+    DataModel.store.value.leihausweis.geburtsjahr =
         _controllerGeburtsjahr.text.trim();
-    DataModel.store.leihausweis.passwort = _controllerPasswort.text.trim();
-    DataModel.store.leihausweis.udid = "${UDID.hashCode}";
+    DataModel.store.value.leihausweis.passwort = _controllerPasswort.text.trim();
+    DataModel.store.value.leihausweis.udid = "${UDID.hashCode}";
   }
 
   _popupValidationDialog(BuildContext context) {
@@ -349,6 +349,6 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
 
   String _createJsonObscured() {
     transmitData();
-    return leihausweisToJsonObscured(DataModel.store.leihausweis);
+    return leihausweisToJsonObscured(DataModel.store.value.leihausweis);
   }
 }

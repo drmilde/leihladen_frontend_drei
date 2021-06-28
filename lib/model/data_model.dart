@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:leihladen_frontend_drei/config/config.dart';
 import 'package:leihladen_frontend_drei/config/persistence.dart';
 import 'package:leihladen_frontend_drei/config/servers/server_liste.dart';
@@ -6,9 +7,10 @@ import 'package:leihladen_frontend_drei/katalog/katalog.dart';
 
 import 'json_loader.dart';
 
-class DataModel {
+class DataModel extends GetxController {
+  static var store = Store.init().obs; // initialisiert und observer
+
   static late ServerListe serverliste;
-  static late Store store; // wird im Konstruktor initialisiert
   static late Config config;
   static late Katalog katalog;
   static JsonLoader loader = new JsonLoader();
@@ -17,7 +19,6 @@ class DataModel {
   static String prePath = "";
 
   DataModel() {
-    store = Store.init();
     serverliste = ServerListe.init();
   }
 
@@ -57,11 +58,11 @@ class DataModel {
 
   static void loadStore() {
     Persistence.load().then((String result) {
-      store = storeFromJson(result);
+      store.value = storeFromJson(result);
     });
   }
 
   static void saveStore() {
-    Persistence.store(storeToJson(store));
+    Persistence.store(storeToJson(store.value));
   }
 }

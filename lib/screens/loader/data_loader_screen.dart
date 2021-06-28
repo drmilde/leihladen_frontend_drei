@@ -36,11 +36,11 @@ class _DataLoaderScreenState extends State<DataLoaderScreen> {
     print("Storedaten lokal geladen");
     if (jsonString != "") {
       Store s = storeFromJson(jsonString);
-      DataModel.store = s;
+      DataModel.store.value = s;
       //DataModel.store.serverliste = serverliste;
     } else {
       Store s = Store.init();
-      DataModel.store = s;
+      DataModel.store.value = s;
       bool saved = await Persistence.store(storeToJson(s));
       print("Store ist leer ... wurde initialisiert und persistiert");
     }

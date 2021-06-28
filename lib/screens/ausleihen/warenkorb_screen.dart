@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/warenkorb_screen_config.dart';
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
@@ -9,15 +10,8 @@ import 'package:leihladen_frontend_drei/screens/ausleihen/reservierung_screen.da
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
-class WarenkorbScreen extends StatefulWidget {
-
-  WarenkorbScreen();
-
-  @override
-  _WarenkorbScreenState createState() => _WarenkorbScreenState();
-}
-
-class _WarenkorbScreenState extends State<WarenkorbScreen> {
+class WarenkorbScreen extends StatelessWidget {
+  final DataModel dm = Get.find();
   WarenkorbScreenConfig config = new WarenkorbScreenConfig();
 
   String title = "Warenkorb";
@@ -57,7 +51,7 @@ class _WarenkorbScreenState extends State<WarenkorbScreen> {
     return Scaffold(
       //endDrawer: AppDrawerWidget(),
       body: CustomScrollView(
-        key: widget.key,
+        key: key,
         slivers: [
           SliverAppBar(
               centerTitle: true,
@@ -107,22 +101,25 @@ class _WarenkorbScreenState extends State<WarenkorbScreen> {
           SliverToBoxAdapter(
             child: _buildBeschreibung(beschreibung),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return _buildWarenkorbCard(index);
-              },
-              childCount: DataModel.store.warenkorb.data.length,
+          Obx(
+            () => SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return _buildWarenkorbCard(index);
+                },
+                childCount: DataModel.store.value.warenkorb.data.length,
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
   Widget _buildWarenkorbCard(int index) {
-    String inventarnummer = DataModel.store.warenkorb.data[index];
-    Eintrag entry = DataModel.katalog.getEintrayByInventarnummer(inventarnummer);
+    String inventarnummer = DataModel.store.value.warenkorb.data[index];
+    Eintrag entry =
+        DataModel.katalog.getEintrayByInventarnummer(inventarnummer);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -159,5 +156,9 @@ class _WarenkorbScreenState extends State<WarenkorbScreen> {
         ],
       ),
     );
+  }
+
+  void update() {
+    // TODO muss ic da etwas machen ?
   }
 }

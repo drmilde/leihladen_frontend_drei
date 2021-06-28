@@ -20,14 +20,14 @@ class AppDrawerWidget extends StatelessWidget {
     String nachname = "Kein";
     String vorname = "Leihausweis";
     String adresse = "Leihladen Fulda";
-    if (DataModel.store.leihausweis.nachname.length > 0) {
-      nachname = "${DataModel.store.leihausweis.nachname}";
+    if (DataModel.store.value.leihausweis.nachname.length > 0) {
+      nachname = "${DataModel.store.value.leihausweis.nachname}";
     }
-    if (DataModel.store.leihausweis.vorname.length > 0) {
-      vorname = "${DataModel.store.leihausweis.vorname}";
+    if (DataModel.store.value.leihausweis.vorname.length > 0) {
+      vorname = "${DataModel.store.value.leihausweis.vorname}";
     }
-    if (DataModel.store.leihausweis.adresse.length > 0) {
-      adresse = "${DataModel.store.leihausweis.adresse}";
+    if (DataModel.store.value.leihausweis.adresse.length > 0) {
+      adresse = "${DataModel.store.value.leihausweis.adresse}";
     }
 
     return SafeArea(

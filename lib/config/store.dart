@@ -149,6 +149,10 @@ class Warenkorb {
     data.remove(inventarnummer);
   }
 
+  bool containsData(String inventarnummer) {
+    return data.contains(inventarnummer);
+  }
+
   void clearData() {
     data.clear();
   }

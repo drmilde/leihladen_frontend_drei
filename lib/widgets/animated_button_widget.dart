@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:leihladen_frontend_drei/widgets/animated_delete_button.dart';
 
 class AnimatedButtonWidget extends StatefulWidget {
   GestureTapCallback? callback;

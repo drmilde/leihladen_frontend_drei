@@ -4,18 +4,26 @@ import 'package:leihladen_frontend_drei/config/screens/katalog_screen_config.dar
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
 import 'package:leihladen_frontend_drei/screens/katalog/katalog_detail_screen.dart';
-import 'package:leihladen_frontend_drei/widgets/animated_button_widget.dart';
 
-class EntryCardWidget extends StatelessWidget {
-  KatalogScreenConfig config = new KatalogScreenConfig();
+import 'animated_button_widget.dart';
+import 'animated_delete_button.dart';
+
+class EntryCardWidget extends StatefulWidget {
   Eintrag entry;
   double height;
 
   EntryCardWidget(this.entry, {this.height = 340});
 
   @override
+  _EntryCardWidgetState createState() => _EntryCardWidgetState();
+}
+
+class _EntryCardWidgetState extends State<EntryCardWidget> {
+  KatalogScreenConfig config = new KatalogScreenConfig();
+
+  @override
   Widget build(BuildContext context) {
-    return _buildSizedCard(context, entry, height: this.height);
+    return _buildSizedCard(context, widget.entry, height: this.widget.height);
   }
 
   Widget _buildSizedCard(BuildContext context, Eintrag entry,
@@ -112,27 +120,12 @@ class EntryCardWidget extends StatelessWidget {
             color: config.getPrimaryColor(),
             text: "Warenkorb+",
             callback: () {
-              DataModel.store.warenkorb.addData(entry.inventarnummer);
+              setState(() {
+                DataModel.store.value.warenkorb.addData(widget.entry.inventarnummer);
+              });
             },
           ),
-          Row(
-            children: [
-              Text(
-                "0",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.nunito(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  // TODO delete from warenkorb
-                },
-                icon: Icon(Icons.delete),
-              ),
-            ],
-          ),
+          AnimatedDeleteButton(widget.entry.inventarnummer),
         ],
       ),
     );
