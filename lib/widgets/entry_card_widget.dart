@@ -121,11 +121,22 @@ class _EntryCardWidgetState extends State<EntryCardWidget> {
             text: "Warenkorb+",
             callback: () {
               setState(() {
-                DataModel.store.value.warenkorb.addData(widget.entry.inventarnummer);
+                DataModel.store.value.warenkorb
+                    .addData(widget.entry.inventarnummer);
               });
             },
           ),
           AnimatedDeleteButton(widget.entry.inventarnummer),
+          /*
+          Obx(
+            () => Container(
+              width: 100,
+              height: 30,
+              child: AnimatedDeleteButton(widget.entry.inventarnummer),
+            ),
+          ),
+
+           */
         ],
       ),
     );

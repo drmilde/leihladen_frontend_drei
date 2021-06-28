@@ -1,54 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
 
-class AnimatedDeleteButton extends StatefulWidget {
+class AnimatedDeleteButton extends StatelessWidget {
+  bool _doesContain = true;
   String inventarnummer = "unkown";
-  late _AnimatedDeleteButtonState state;
 
   AnimatedDeleteButton(this.inventarnummer) {
-     state = _AnimatedDeleteButtonState();
-  }
-
-  @override
-  _AnimatedDeleteButtonState createState() => state;
-
-
-  void update() {
-    state.update();
-  }
-}
-
-class _AnimatedDeleteButtonState extends State<AnimatedDeleteButton> {
-  bool _doesContain = true;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _doesContain =
-        DataModel.store.value.warenkorb.containsData(widget.inventarnummer);
+    _doesContain = DataModel.store.value.warenkorb.containsData(inventarnummer);
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        DataModel.store.value.warenkorb.removeData(widget.inventarnummer);
-        setState(() {
-          _doesContain =
-              DataModel.store.value.warenkorb.containsData(widget.inventarnummer);
-        });
+        DataModel.store.value.warenkorb.removeData(inventarnummer);
+        _doesContain =
+            DataModel.store.value.warenkorb.containsData(inventarnummer);
       },
-      child: AnimatedCrossFade(
+      child: Obx(() {
+        _doesContain =
+            DataModel.store.value.warenkorb.containsData(inventarnummer);
+        //return Text("xxxx : ${_doesContain}");
+        return AnimatedCrossFade(
           firstChild: _makeContent("1"),
           secondChild: _makeContent("0"),
           crossFadeState: _doesContain
               ? CrossFadeState.showFirst
               : CrossFadeState.showSecond,
-          duration: Duration(milliseconds: 200)),
+          duration: Duration(milliseconds: 200),
+        );
+      }),
     );
   }
 
@@ -75,13 +59,5 @@ class _AnimatedDeleteButtonState extends State<AnimatedDeleteButton> {
         ],
       ),
     );
-  }
-
-
-  void update() {
-    setState(() {
-      _doesContain =
-          DataModel.store.value.warenkorb.containsData(widget.inventarnummer);
-    });
   }
 }
