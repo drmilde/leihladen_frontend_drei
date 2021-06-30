@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/leihausweis_screen_config.dart';
 import 'package:leihladen_frontend_drei/config/store.dart';
-import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/qr_code_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 
@@ -12,6 +13,7 @@ class LeihausweisScreen extends StatefulWidget {
 }
 
 class _LeihausweisScreenState extends State<LeihausweisScreen> {
+  final DataModelController dmc = Get.find();
   LeihausweisScreenConfig config = LeihausweisScreenConfig();
   String UDID = "Ihre Ausweisnummer";
 
@@ -31,7 +33,7 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
 
     //DataModel.loadStore();
 
-    Leihausweis ausweis = DataModel.store.value.leihausweis;
+    Leihausweis ausweis = dmc.store.value.leihausweis;
     _controllerNachname.text = ausweis.nachname;
     _controllerVorname.text = ausweis.vorname;
     _controllerAdresse.text = ausweis.adresse;
@@ -314,18 +316,20 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
   }
 
   void _saveData() {
-    DataModel.saveStore();
+    dmc.saveStore();
   }
 
   void transmitData() {
-    DataModel.store.value.leihausweis.nachname = _controllerNachname.text.trim();
-    DataModel.store.value.leihausweis.vorname = _controllerVorname.text.trim();
-    DataModel.store.value.leihausweis.adresse = _controllerAdresse.text.trim();
-    DataModel.store.value.leihausweis.mobile = _controllerMobile.text.trim();
-    DataModel.store.value.leihausweis.geburtsjahr =
+    dmc.store.value.leihausweis.nachname =
+        _controllerNachname.text.trim();
+    dmc.store.value.leihausweis.vorname = _controllerVorname.text.trim();
+    dmc.store.value.leihausweis.adresse = _controllerAdresse.text.trim();
+    dmc.store.value.leihausweis.mobile = _controllerMobile.text.trim();
+    dmc.store.value.leihausweis.geburtsjahr =
         _controllerGeburtsjahr.text.trim();
-    DataModel.store.value.leihausweis.passwort = _controllerPasswort.text.trim();
-    DataModel.store.value.leihausweis.udid = "${UDID.hashCode}";
+    dmc.store.value.leihausweis.passwort =
+        _controllerPasswort.text.trim();
+    dmc.store.value.leihausweis.udid = "${UDID.hashCode}";
   }
 
   _popupValidationDialog(BuildContext context) {
@@ -349,6 +353,6 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
 
   String _createJsonObscured() {
     transmitData();
-    return leihausweisToJsonObscured(DataModel.store.value.leihausweis);
+    return leihausweisToJsonObscured(dmc.store.value.leihausweis);
   }
 }

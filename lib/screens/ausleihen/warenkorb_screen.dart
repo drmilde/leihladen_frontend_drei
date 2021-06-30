@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/warenkorb_screen_config.dart';
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
-import 'package:leihladen_frontend_drei/model/data_model.dart';
 import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/reservierung_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
@@ -120,7 +119,7 @@ class WarenkorbScreen extends StatelessWidget {
     //String inventarnummer = DataModel.store.value.warenkorb.data[index];
     String inventarnummer = dmc.store.value.warenkorb.data[index];
     Eintrag entry =
-        DataModel.katalog.getEintrayByInventarnummer(inventarnummer);
+        dmc.katalog.getEintrayByInventarnummer(inventarnummer);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

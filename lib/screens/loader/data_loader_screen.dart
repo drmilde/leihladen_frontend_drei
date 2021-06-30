@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:leihladen_frontend_drei/config/config.dart';
 import 'package:leihladen_frontend_drei/config/persistence.dart';
 import 'package:leihladen_frontend_drei/config/store.dart';
 import 'package:leihladen_frontend_drei/katalog/katalog.dart';
-import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/model/json_loader.dart';
 import 'package:leihladen_frontend_drei/screens/start_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 
 class DataLoaderScreen extends StatefulWidget {
+  final DataModelController dmc = Get.find();
+
   String dataServer = "";
   String dataPort = "";
   String dataPrepath = "";
@@ -20,7 +23,7 @@ class DataLoaderScreen extends StatefulWidget {
     required this.dataPrepath,
     required this.dataDir,
   }) {
-   DataModel.prePath = this.dataPrepath;
+    dmc.prePath = this.dataPrepath;
   }
 
   @override
@@ -28,23 +31,24 @@ class DataLoaderScreen extends StatefulWidget {
 }
 
 class _DataLoaderScreenState extends State<DataLoaderScreen> {
-  Future<bool> loadConfigAndCatalog() async {
+  final DataModelController dmc = Get.find();
 
+  Future<bool> loadConfigAndCatalog() async {
     // 1. try loading Store
     String jsonString = await Persistence.load();
     jsonString = jsonString.trim();
     print("Storedaten lokal geladen");
     if (jsonString != "") {
       Store s = storeFromJson(jsonString);
-      DataModel.store.value = s;
+      dmc.store.value = s;
       //DataModel.store.serverliste = serverliste;
     } else {
       Store s = Store.init();
-      DataModel.store.value = s;
+
+      dmc.store.value = s;
       bool saved = await Persistence.store(storeToJson(s));
       print("Store ist leer ... wurde initialisiert und persistiert");
     }
-
 
     // 2. Config laden
     JsonLoader loader = new JsonLoader();
@@ -55,7 +59,7 @@ class _DataLoaderScreenState extends State<DataLoaderScreen> {
       dataDir: widget.dataDir,
       configFileName: "config.json",
     );
-    DataModel.setConfig(config);
+    dmc.setConfig(config);
 
     // 3. load the katalog
     Katalog catalog = await loader.loadUncompressedCatalogDataFromServer(
@@ -65,8 +69,7 @@ class _DataLoaderScreenState extends State<DataLoaderScreen> {
       dataDir: widget.dataDir,
       catalogFileName: "katalog.json",
     );
-    DataModel.katalog = catalog;
-
+    dmc.katalog = catalog;
     return true;
   }
 

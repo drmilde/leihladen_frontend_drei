@@ -1,7 +1,10 @@
-import 'package:http/http.dart';
-import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 
 class Communication {
+  final DataModelController dmc = Get.find();
+
   // http://medsrv.informatik.hs-fulda.de:12345/data/config/leihladenfulda/
   // http://localhost:80/data/config/leihladenfulda/config.json
 
@@ -14,7 +17,7 @@ class Communication {
   }
 
   String get prePath {
-    return DataModel.prePath;
+    return dmc.prePath;
   }
 
   String get serverPort {
@@ -38,7 +41,7 @@ class Communication {
     // make GET request
     print ("$url $prePath $path");
     var uri = Uri.http(url, prePath + path);
-    Response response = await get(uri);
+    http.Response response = await http.get(uri);
 
     // int statusCode = response.statusCode;
     // Map<String, String> headers = response.headers;

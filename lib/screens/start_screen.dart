@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leihladen_frontend_drei/config/config.dart';
 import 'package:leihladen_frontend_drei/config/screens/start_screen_config.dart';
-import 'package:leihladen_frontend_drei/model/json_loader.dart';
 import 'package:leihladen_frontend_drei/screens/hauptseiten/haupt_seite_screen.dart';
 
 class StartScreen extends StatefulWidget {

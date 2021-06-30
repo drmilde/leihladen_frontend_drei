@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/servers/server_liste.dart';
-import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/screens/loader/data_loader_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 
 class ServerAuswahlScreen extends StatelessWidget {
+  final DataModelController dmc = Get.find();
   ServerListe serverliste = ServerListe.init();
   String bootServer = "medsrv.informatik.hs-fulda.de";
   String bootPort = "80";
@@ -20,7 +22,7 @@ class ServerAuswahlScreen extends StatelessWidget {
       fab: _buildListe(),
       showFab: false,
       body: FutureBuilder(
-        future: DataModel.getServerliste(),
+        future: dmc.getServerliste(),
         // a previously-obtained Future<String> or null
         builder: (BuildContext context, AsyncSnapshot<ServerListe> snapshot) {
           // Fall 1: keine Daten geladen
@@ -172,23 +174,9 @@ class ServerAuswahlScreen extends StatelessWidget {
                     SizedBox(
                       height: 16,
                     ),
-                    Text("Dataserver: ${serverliste.server[index].server}"),
-                    Text("Dataport: ${serverliste.server[index].port}"),
-                    Text("Dataprepath: ${serverliste.server[index].prepath}"),
-                    /*
-                        Text(serverliste.server[index].logo),
-                        Text(serverliste.server[index].protokoll),
-                        Text(serverliste.server[index].config),
-                        Text(serverliste.server[index].configformat),
-                        Text(serverliste.server[index].configversion),
-                        Text(serverliste.server[index].catalog),
-                        Text(serverliste.server[index].catalogformat),
-                        Text(serverliste.server[index].catalogversion),
-                        Text(serverliste.server[index].server),
-                        Text(serverliste.server[index].port),
-                        Text(serverliste.server[index].secured),
-
-                         */
+                    //Text("Dataserver: ${serverliste.server[index].server}"),
+                    //Text("Dataport: ${serverliste.server[index].port}"),
+                    //Text("Dataprepath: ${serverliste.server[index].prepath}"),
                   ],
                 ),
               ),

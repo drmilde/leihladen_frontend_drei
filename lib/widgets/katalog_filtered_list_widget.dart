@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/katalog_screen_config.dart';
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
 import 'package:leihladen_frontend_drei/katalog/katalog.dart';
-import 'package:leihladen_frontend_drei/model/data_model.dart';
-import 'package:leihladen_frontend_drei/screens/katalog/katalog_detail_screen.dart';
+import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
 class KatalogFilteredListWidget extends StatefulWidget {
@@ -28,6 +28,8 @@ class KatalogFilteredListWidget extends StatefulWidget {
 }
 
 class _KatalogFilteredListWidgetState extends State<KatalogFilteredListWidget> {
+  final DataModelController dmc = Get.find();
+
   Katalog catalog = new Katalog();
   KatalogScreenConfig config = new KatalogScreenConfig();
   int sortState = 0; // no sorting
@@ -38,7 +40,7 @@ class _KatalogFilteredListWidgetState extends State<KatalogFilteredListWidget> {
     return Container(
       child: FutureBuilder(
         //future: loader.loadUncomproessedCatalogDataFromServer(),
-        future: DataModel.getKatalog(),
+        future: dmc.getKatalog(),
         // a previously-obtained Future<String> or null
         builder: (BuildContext context, AsyncSnapshot<Katalog> snapshot) {
           // Fall 1: keine Daten geladen

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:leihladen_frontend_drei/config/servers/server_liste.dart';
-import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/model/json_loader.dart';
 import 'package:leihladen_frontend_drei/screens/loader/server_auswahl_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
@@ -11,13 +12,15 @@ class BootLoaderScreen extends StatefulWidget {
 }
 
 class _BootLoaderScreenState extends State<BootLoaderScreen> {
+  final DataModelController dmc = Get.find();
+
   Future<bool> loadServerlisteAndStore() async {
     // 0. Serverliste laden
     // TODO Serverliste von leihladen.org laden
     JsonLoader loader = new JsonLoader();
     ServerListe serverliste = await loader.loadUncompressedServerListe();
     print("Serverliste vom Bootserver geladen");
-    DataModel.serverliste = serverliste;
+    dmc.serverliste = serverliste;
 
     return true;
   }

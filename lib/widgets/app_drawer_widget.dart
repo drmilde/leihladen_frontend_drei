@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:leihladen_frontend_drei/config/screens/app_drawer_widget_config.dart';
-import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/screens/abholen/laden_info_screen.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/entliehen_screen.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/leihausweis_screen.dart';
@@ -13,6 +14,7 @@ import 'package:leihladen_frontend_drei/screens/start_screen.dart';
 import 'app_drawer_entry_widget.dart';
 
 class AppDrawerWidget extends StatelessWidget {
+  final DataModelController dmc = Get.find();
   AppDrawerWidgetConfig config = AppDrawerWidgetConfig();
 
   @override
@@ -20,14 +22,14 @@ class AppDrawerWidget extends StatelessWidget {
     String nachname = "Kein";
     String vorname = "Leihausweis";
     String adresse = "Leihladen Fulda";
-    if (DataModel.store.value.leihausweis.nachname.length > 0) {
-      nachname = "${DataModel.store.value.leihausweis.nachname}";
+    if (dmc.store.value.leihausweis.nachname.length > 0) {
+      nachname = "${dmc.store.value.leihausweis.nachname}";
     }
-    if (DataModel.store.value.leihausweis.vorname.length > 0) {
-      vorname = "${DataModel.store.value.leihausweis.vorname}";
+    if (dmc.store.value.leihausweis.vorname.length > 0) {
+      vorname = "${dmc.store.value.leihausweis.vorname}";
     }
-    if (DataModel.store.value.leihausweis.adresse.length > 0) {
-      adresse = "${DataModel.store.value.leihausweis.adresse}";
+    if (dmc.store.value.leihausweis.adresse.length > 0) {
+      adresse = "${dmc.store.value.leihausweis.adresse}";
     }
 
     return SafeArea(

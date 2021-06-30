@@ -1,6 +1,9 @@
-import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:get/get.dart';
+import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 
 class NetzwerkConfig {
+  final DataModelController dmc = Get.find();
+
   NetzwerkConfig({
     this.server = "",
     this.port = "",
@@ -62,6 +65,6 @@ class NetzwerkConfig {
 
   // Helper
   String getBasicUrl() {
-    return "http://${server}:${port}${DataModel.prePath}${rootDir}";
+    return "http://${server}:${port}${dmc.prePath}${rootDir}";
   }
 }
