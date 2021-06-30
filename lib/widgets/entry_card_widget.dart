@@ -2,28 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/katalog_screen_config.dart';
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
-import 'package:leihladen_frontend_drei/model/data_model.dart';
 import 'package:leihladen_frontend_drei/screens/katalog/katalog_detail_screen.dart';
+import 'package:leihladen_frontend_drei/widgets/warenkorb_row_widget.dart';
 
-import 'animated_button_widget.dart';
-import 'animated_delete_button.dart';
 
-class EntryCardWidget extends StatefulWidget {
+
+class EntryCardWidget extends StatelessWidget {
+  KatalogScreenConfig config = new KatalogScreenConfig();
   Eintrag entry;
   double height;
 
   EntryCardWidget(this.entry, {this.height = 340});
 
   @override
-  _EntryCardWidgetState createState() => _EntryCardWidgetState();
-}
-
-class _EntryCardWidgetState extends State<EntryCardWidget> {
-  KatalogScreenConfig config = new KatalogScreenConfig();
-
-  @override
   Widget build(BuildContext context) {
-    return _buildSizedCard(context, widget.entry, height: this.widget.height);
+    return _buildSizedCard(context, entry, height: this.height);
   }
 
   Widget _buildSizedCard(BuildContext context, Eintrag entry,
@@ -98,46 +91,10 @@ class _EntryCardWidgetState extends State<EntryCardWidget> {
                 ),
               ),
             ),
-            _WarenkorbRow(entry),
-            //Text(entry.beschreibung),
-            //Text(entry.inventarnummer),
+            //_WarenkorbRow(entry),
+            WarenkorbRowWidget(entry),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _WarenkorbRow(Eintrag entry) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 8,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          AnimatedButtonWidget(
-            color: config.getPrimaryColor(),
-            text: "Warenkorb+",
-            callback: () {
-              setState(() {
-                DataModel.store.value.warenkorb
-                    .addData(widget.entry.inventarnummer);
-              });
-            },
-          ),
-          AnimatedDeleteButton(widget.entry.inventarnummer),
-          /*
-          Obx(
-            () => Container(
-              width: 100,
-              height: 30,
-              child: AnimatedDeleteButton(widget.entry.inventarnummer),
-            ),
-          ),
-
-           */
-        ],
       ),
     );
   }

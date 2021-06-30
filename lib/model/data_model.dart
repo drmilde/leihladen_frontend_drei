@@ -26,6 +26,31 @@ class DataModel extends GetxController {
     config = c;
   }
 
+  // Update-Funktionen Store
+
+  static void addDataToWarenkorb(String inventarnummer) {
+    store.update((s) {
+      s!.warenkorb.addData(inventarnummer);
+    });
+  }
+
+  static void removeDataToWarenkorb(String inventarnummer) {
+    store.update((s) {
+      s!.warenkorb.removeData(inventarnummer);
+    });
+  }
+
+  static bool warenkorbDoesContain(String inventarnummer) {
+    bool result = false;
+    store.update((s) {
+      result = s!.warenkorb.containsData(inventarnummer);
+    });
+    return result;
+  }
+
+
+  // Funktion Serverliste
+
   static Future<ServerListe> getServerliste({bool forceLoad = false}) async {
     if (forceLoad) {
       serverliste = await loader.loadUncompressedServerListe();

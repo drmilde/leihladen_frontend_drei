@@ -6,12 +6,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/warenkorb_screen_config.dart';
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
 import 'package:leihladen_frontend_drei/model/data_model.dart';
+import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/reservierung_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
 class WarenkorbScreen extends StatelessWidget {
-  final DataModel dm = Get.find();
+  final DataModelController dmc = Get.find();
   WarenkorbScreenConfig config = new WarenkorbScreenConfig();
 
   String title = "Warenkorb";
@@ -91,7 +92,6 @@ class WarenkorbScreen extends StatelessWidget {
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                            //config.getKatalogImageUrl("http://hosted.met-art.com/Full_met-art_ESH_5_617/full/met-art_ESH_5_1.jpg"),
                             imageUrl,
                           )),
                     ),
@@ -107,7 +107,7 @@ class WarenkorbScreen extends StatelessWidget {
                 (context, index) {
                   return _buildWarenkorbCard(index);
                 },
-                childCount: DataModel.store.value.warenkorb.data.length,
+                childCount: dmc.store.value.warenkorb.data.length,
               ),
             ),
           ),
@@ -117,7 +117,8 @@ class WarenkorbScreen extends StatelessWidget {
   }
 
   Widget _buildWarenkorbCard(int index) {
-    String inventarnummer = DataModel.store.value.warenkorb.data[index];
+    //String inventarnummer = DataModel.store.value.warenkorb.data[index];
+    String inventarnummer = dmc.store.value.warenkorb.data[index];
     Eintrag entry =
         DataModel.katalog.getEintrayByInventarnummer(inventarnummer);
 
@@ -156,9 +157,5 @@ class WarenkorbScreen extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void update() {
-    // TODO muss ic da etwas machen ?
   }
 }
