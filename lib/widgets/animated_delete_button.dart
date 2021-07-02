@@ -22,10 +22,9 @@ class AnimatedDeleteButton extends StatelessWidget {
           child: _makeContent("1"),
         ),
         secondChild: _makeContent("0"),
-        crossFadeState:
-            dmc.store.value.warenkorb.containsData(inventarnummer)
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
+        crossFadeState: dmc.store.value.warenkorb.containsData(inventarnummer)
+            ? CrossFadeState.showFirst
+            : CrossFadeState.showSecond,
         duration: Duration(milliseconds: 200),
       );
     });
@@ -33,18 +32,22 @@ class AnimatedDeleteButton extends StatelessWidget {
 
   Widget _makeContent(String text) {
     return Container(
-      width: 50,
+      width: 60,
       height: 35,
       //color: Colors.green,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.nunito(
-              color: Colors.black,
-              fontSize: 16,
+          Container(
+            width: 20,
+            color: (text != "0") ? Colors.green : Colors.white,
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.nunito(
+                color: (text != "0") ? Colors.white : Colors.black,
+                fontSize: 16,
+              ),
             ),
           ),
           Icon(
