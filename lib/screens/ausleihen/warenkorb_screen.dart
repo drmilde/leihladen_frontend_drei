@@ -51,11 +51,13 @@ class WarenkorbScreen extends StatelessWidget {
           SliverAppBar(
               centerTitle: true,
               pinned: true,
-              expandedHeight: 400,
+              expandedHeight: 200,
               backgroundColor: config.getPrimaryColor(),
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    dmc.warenkorbClearData();
+                  },
                   icon: Icon(Icons.clear),
                 ),
                 IconButton(

@@ -39,6 +39,12 @@ class DataModelController extends GetxController {
     });
   }
 
+  void warenkorbClearData() {
+    store.update((s) {
+      s!.warenkorb.clearData();
+    });
+  }
+
   bool warenkorbDoesContain(String inventarnummer) {
     bool result = false;
     store.update((s) {
