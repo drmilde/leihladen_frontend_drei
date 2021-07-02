@@ -1,14 +1,17 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/katalog_screen_config.dart';
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
-import 'package:leihladen_frontend_drei/screens/start_screen.dart';
-import 'package:leihladen_frontend_drei/widgets/app_drawer_widget.dart';
+import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/warenkorb_screen.dart';
+import 'package:leihladen_frontend_drei/widgets/animated_button_widget.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 
 class KatalogDetailScreen extends StatelessWidget {
+  final DataModelController dmc = Get.find();
   KatalogScreenConfig config = new KatalogScreenConfig();
   String title = "Details";
   String inventarnummer = "";
@@ -26,23 +29,21 @@ class KatalogDetailScreen extends StatelessWidget {
         title: Text(entry.bezeichnung),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.sort),
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => WarenkorbScreen()));
+            },
+            icon: Icon(Icons.shopping_cart_outlined),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search),
-          )
         ],
       ),
-      showAppbar: false,
-      fab: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => StartScreen()));
+      showAppbar: true,
+      fab: AnimatedButtonWidget(
+        color: config.getPrimaryColor(),
+        text: "Warenkorb+",
+        callback: () {
+          dmc.warenkorbAddData(entry.inventarnummer);
         },
-        child: Text("W+", style: TextStyle(color: Colors.white)),
-        backgroundColor: config.getPrimaryColor(),
       ),
       showFab: true,
       body: _buildContent(context, entry),
@@ -56,7 +57,7 @@ class KatalogDetailScreen extends StatelessWidget {
         key: key,
         slivers: [
           SliverAppBar(
-            centerTitle: true,
+            centerTitle: false,
             pinned: true,
             expandedHeight: 400,
             backgroundColor: config.getPrimaryColor(),

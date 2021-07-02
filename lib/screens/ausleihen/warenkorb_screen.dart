@@ -75,7 +75,7 @@ class WarenkorbScreen extends StatelessWidget {
                 ),
               ],
               flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
+                centerTitle: false,
                 title: Text(
                   title.substring(
                     0,
