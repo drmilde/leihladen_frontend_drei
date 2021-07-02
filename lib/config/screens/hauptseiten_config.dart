@@ -27,11 +27,6 @@ class HauptseitenConfig {
     return "${basicUrl}${imageDir}${name}";
   }
 
-  String getStartImageUrl(int index) {
-    String value = getScreenVal("/content/image/logo${index}");
-    return "${basicUrl}${startDir}${value}";
-  }
-
   String getTeamImageUrl() {
     String value = getScreenVal("/content/image/team");
     return "${basicUrl}${galleryDir}${value}";
