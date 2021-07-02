@@ -13,6 +13,7 @@ class AuswaehlenScreen extends StatefulWidget {
 class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
   AuswaehlenScreenConfig config = new AuswaehlenScreenConfig();
   final key = UniqueKey();
+  final lastItemKey = new GlobalKey();
   List<VoidCallback> callbacks = [];
 
   @override
@@ -186,10 +187,12 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
         ///Lazy building of list
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
-            /// To convert this infinite list to a list with "n" no of items,
-            /// uncomment the following line:
-            /// if (index > n) return null;
-            return listItem(config.getPrimaryColor(), index, crossCount);
+            return listItem(
+              config.getPrimaryColor(),
+              index,
+              crossCount,
+              addKey: (index >= 8),
+            );
           },
 
           /// Set childCount to limit no.of items
@@ -197,12 +200,16 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
         ));
   }
 
-  Widget listItem(Color color, int index, int crossCount) {
+  Widget listItem(Color color, int index, int crossCount,
+      {bool addKey = false}) {
     int columNr = (index % crossCount);
+
+    //print("${index}, ${addKey}");
 
     switch (columNr) {
       case 0:
         return Container(
+          key: (addKey) ? lastItemKey : UniqueKey(),
           color: Colors.white,
           child: Center(
             child: Padding(

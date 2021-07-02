@@ -31,6 +31,8 @@ class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget> {
         decoration: BoxDecoration(
           color: widget.color,
           borderRadius: new BorderRadius.only(
+            topLeft: new Radius.circular(10.0),
+            bottomLeft: new Radius.circular(10.0),
             topRight: new Radius.circular(10.0),
             bottomRight: new Radius.circular(10.0),
           ),

@@ -38,11 +38,11 @@ class _StartScreenState extends State<StartScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Container(
-                            width: 120,
+                            height: 90,
                             child: Image.network(config.getStartImageUrl(1)),
                           ),
                           Container(
-                            width: 120,
+                            height: 90,
                             child: Image.network(config.getStartImageUrl(3)),
                           ),
                         ],

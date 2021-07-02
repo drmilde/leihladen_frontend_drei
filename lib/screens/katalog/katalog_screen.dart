@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/screens/katalog_screen_config.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/warenkorb_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/katalog_filtered_list_widget.dart';
 import 'package:leihladen_frontend_drei/widgets/search_widget.dart';
@@ -51,7 +52,14 @@ class _KatalogScreenState extends State<KatalogScreen> {
               });
             },
             icon: Icon(Icons.search),
-          )
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => WarenkorbScreen()));
+            },
+            icon: Icon(Icons.shopping_cart_outlined),
+          ),
         ],
       ),
       fab: Container(),

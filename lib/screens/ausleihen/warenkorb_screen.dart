@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,7 @@ import 'package:leihladen_frontend_drei/config/screens/warenkorb_screen_config.d
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
 import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/reservierung_screen.dart';
+import 'package:leihladen_frontend_drei/widgets/animated_button_widget.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
@@ -16,8 +18,8 @@ class WarenkorbScreen extends StatelessWidget {
 
   String title = "Warenkorb";
 
-  String beschreibung = "Der Warenkorb zeigt Ihre ausgwählten Dinge."
-      " Durch Wischen können Sie das Ding entfernen.";
+  String beschreibung = "Der Warenkorb zeigt Ihre ausgewählten Dinge."
+      " Mit einem Klick auf den Mülleimer entfernen Sie das Ding aus dem Warenkorb.";
 
   String imageUrl =
       "http://medsrv.informatik.hs-fulda.de/leihladenapp/data/config/leihladenfulda/boot/nackt.jpg";
@@ -34,15 +36,8 @@ class WarenkorbScreen extends StatelessWidget {
         title: Text(title),
       ),
       showAppbar: false,
-      fab: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ReservierungScreen()));
-        },
-        child: Text("R", style: TextStyle(color: Colors.white)),
-        backgroundColor: config.getPrimaryColor(),
-      ),
-      showFab: true,
+      fab: Container(),
+      showFab: false,
       body: _buildContent(context),
     );
   }
@@ -68,7 +63,12 @@ class WarenkorbScreen extends StatelessWidget {
                   icon: Icon(Icons.save_outlined),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ReservierungScreen()));
+                  },
                   icon: Icon(Icons.shopping_bag_outlined),
                 ),
               ],
@@ -98,7 +98,7 @@ class WarenkorbScreen extends StatelessWidget {
                 ),
               )),
           SliverToBoxAdapter(
-            child: _buildBeschreibung(beschreibung),
+            child: _buildBeschreibung(context, beschreibung),
           ),
           Obx(
             () => SliverList(
@@ -118,8 +118,7 @@ class WarenkorbScreen extends StatelessWidget {
   Widget _buildWarenkorbCard(int index) {
     //String inventarnummer = DataModel.store.value.warenkorb.data[index];
     String inventarnummer = dmc.store.value.warenkorb.data[index];
-    Eintrag entry =
-        dmc.katalog.getEintrayByInventarnummer(inventarnummer);
+    Eintrag entry = dmc.katalog.getEintrayByInventarnummer(inventarnummer);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -127,7 +126,7 @@ class WarenkorbScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBeschreibung(String beschreibung) {
+  Widget _buildBeschreibung(BuildContext context, String beschreibung) {
     double fontSize = 14;
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -135,10 +134,26 @@ class WarenkorbScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Beschreibung",
-            style: GoogleFonts.nunito(
-                fontSize: fontSize, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Beschreibung",
+                style: GoogleFonts.nunito(
+                    fontSize: fontSize, fontWeight: FontWeight.bold),
+              ),
+              AnimatedButtonWidget(
+                callback: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ReservierungScreen()));
+                },
+                text: "Reservierung",
+                color: config.getPrimaryColor(),
+              ),
+            ],
           ),
           SizedBox(
             height: 16,
