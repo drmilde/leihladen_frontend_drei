@@ -37,7 +37,7 @@ class KatalogDetailScreen extends StatelessWidget {
           ),
         ],
       ),
-      showAppbar: true,
+      showAppbar: false,
       fab: AnimatedButtonWidget(
         color: config.getPrimaryColor(),
         text: "Warenkorb+",
@@ -61,6 +61,15 @@ class KatalogDetailScreen extends StatelessWidget {
             pinned: true,
             expandedHeight: 400,
             backgroundColor: config.getPrimaryColor(),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => WarenkorbScreen()));
+                },
+                icon: Icon(Icons.shopping_cart_outlined),
+              ),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Text(
