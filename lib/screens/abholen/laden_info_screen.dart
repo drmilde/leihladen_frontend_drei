@@ -34,7 +34,12 @@ class LadenInfoScreen extends StatelessWidget {
       showDrawer: false,
       appbar: AppBar(
         backgroundColor: config.getPrimaryColor(),
-        title: Text(title),
+        title: Text(
+          config.getAppbarTitle().substring(
+                0,
+                min(config.getAppbarTitle().length, 30),
+              ),
+        ),
       ),
       showAppbar: false,
       fab: FloatingActionButton(
@@ -45,7 +50,7 @@ class LadenInfoScreen extends StatelessWidget {
         child: Text("W+", style: TextStyle(color: Colors.white)),
         backgroundColor: config.getPrimaryColor(),
       ),
-      showFab: true,
+      showFab: false,
       body: _buildContent(context),
     );
   }
@@ -57,32 +62,18 @@ class LadenInfoScreen extends StatelessWidget {
         key: key,
         slivers: [
           SliverAppBar(
-              centerTitle: true,
+              title: Text(
+                config.getAppbarTitle().substring(
+                      0,
+                      min(config.getAppbarTitle().length, 30),
+                    ),
+              ),
+              centerTitle: false,
               pinned: true,
-              expandedHeight: 400,
+              expandedHeight: 300,
               backgroundColor: config.getPrimaryColor(),
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.clear),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.save_outlined),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.shopping_bag_outlined),
-                ),
-              ],
               flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Text(
-                  title.substring(
-                    0,
-                    min(title.length, 30),
-                  ),
-                ),
+                centerTitle: false,
                 background: GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop();
@@ -94,52 +85,87 @@ class LadenInfoScreen extends StatelessWidget {
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                            //config.getKatalogImageUrl("http://hosted.met-art.com/Full_met-art_ESH_5_617/full/met-art_ESH_5_1.jpg"),
-                            imageUrl,
+                            config.getHeaderImageUrl(),
                           )),
                     ),
                   ),
                 ),
               )),
           SliverToBoxAdapter(
-            child: _buildBeschreibung(beschreibung +
-                beschreibung +
-                beschreibung +
-                beschreibung +
-                beschreibung),
+            child: _buildHeader(config.getScreenVal("/content/adresse/header")),
+          ),
+          SliverToBoxAdapter(
+            child: _buildBeschreibung(
+                config.getScreenVal("/content/adresse/text")),
+          ),
+          SliverToBoxAdapter(
+            child: _buildBeschreibung(
+                config.getScreenVal("/content/telmail/text")),
+          ),
+          SliverToBoxAdapter(
+            child: _buildBeschreibung(
+                config.getScreenVal("/content/adresse/anfahrt")),
+          ),
+          SliverToBoxAdapter(
+            child: _buildHeader(
+                config.getScreenVal("/content/oeffnungszeiten/header")),
+          ),
+          SliverToBoxAdapter(
+            child: _buildBeschreibung(
+                config.getScreenVal("/content/oeffnungszeiten/text1")),
+          ),
+          SliverToBoxAdapter(
+            child: _buildBeschreibung(
+                config.getScreenVal("/content/oeffnungszeiten/text2")),
+          ),
+          SliverToBoxAdapter(
+            child: _buildBeschreibung(
+                config.getScreenVal("/content/oeffnungszeiten/text3")),
+          ),
+          SliverToBoxAdapter(
+            child: _buildHeader(
+                config.getScreenVal("/content/gebaeude/header")),
+          ),
+          SliverToBoxAdapter(
+            child: _buildBeschreibung(
+                config.getScreenVal("/content/gebaeude/text1")),
+          ),
+          SliverToBoxAdapter(
+            child: _buildBeschreibung(
+                config.getScreenVal("/content/gebaeude/text2")),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildBeschreibung(String beschreibung) {
+  Widget _buildHeader(String text) {
     double fontSize = 14;
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Beschreibung",
-            style: GoogleFonts.nunito(
-                fontSize: fontSize, fontWeight: FontWeight.bold),
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+        child: Text(
+          text,
+          style: GoogleFonts.nunito(
+              fontSize: fontSize, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBeschreibung(String text) {
+    double fontSize = 14;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        //width: width,
+        child: Text(
+          text,
+          textAlign: TextAlign.justify,
+          style: GoogleFonts.nunito(
+            fontSize: fontSize,
           ),
-          SizedBox(
-            height: 16,
-          ),
-          Container(
-            //width: width,
-            child: Text(
-              beschreibung,
-              textAlign: TextAlign.justify,
-              style: GoogleFonts.nunito(
-                fontSize: fontSize,
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

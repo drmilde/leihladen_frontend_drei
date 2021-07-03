@@ -18,6 +18,7 @@ class _MitmachenScreenState extends State<MitmachenScreen> {
   MitmachenScreenConfig config = new MitmachenScreenConfig();
   final key = UniqueKey();
   List<VoidCallback> callbacks = [];
+  bool isSmall = false;
 
   @override
   void initState() {
@@ -44,6 +45,7 @@ class _MitmachenScreenState extends State<MitmachenScreen> {
 
   @override
   Widget build(BuildContext context) {
+    isSmall = (MediaQuery.of(context).size.height < 700);
     return DynamicScaffold(
       drawer: Container(),
       appbar: AppBar(
@@ -66,7 +68,7 @@ class _MitmachenScreenState extends State<MitmachenScreen> {
           SliverAppBar(
             centerTitle: true,
             pinned: true,
-            expandedHeight: 170 + 64,
+            expandedHeight: isSmall? (115): (170 + 64),
             backgroundColor: config.getPrimaryColor(),
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
@@ -90,7 +92,7 @@ class _MitmachenScreenState extends State<MitmachenScreen> {
                   config.getBeschreibungText(),
                   textAlign: TextAlign.justify,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               ),

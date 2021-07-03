@@ -15,6 +15,7 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
   final key = UniqueKey();
   final lastItemKey = new GlobalKey();
   List<VoidCallback> callbacks = [];
+  bool isSmall = false;
 
   @override
   void initState() {
@@ -116,6 +117,7 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
 
   @override
   Widget build(BuildContext context) {
+    isSmall = (MediaQuery.of(context).size.height < 700);
     return DynamicScaffold(
       drawer: Container(),
       appbar: AppBar(
@@ -138,7 +140,7 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
           SliverAppBar(
             centerTitle: true,
             pinned: true,
-            expandedHeight: 170 + 64,
+            expandedHeight: isSmall? (115): (170 + 64),
             backgroundColor: config.getPrimaryColor(),
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
@@ -162,7 +164,7 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
                   config.getBeschreibungText(),
                   textAlign: TextAlign.justify,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               ),

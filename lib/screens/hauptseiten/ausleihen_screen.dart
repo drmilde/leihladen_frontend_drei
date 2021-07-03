@@ -17,6 +17,7 @@ class _AusleihenScreenState extends State<AusleihenScreen> {
   AusleihenScreenConfig config = new AusleihenScreenConfig();
   final key = UniqueKey();
   List<VoidCallback> callbacks = [];
+  bool isSmall = false;
 
   @override
   void initState() {
@@ -31,8 +32,8 @@ class _AusleihenScreenState extends State<AusleihenScreen> {
             .push(MaterialPageRoute(builder: (context) => WarenkorbScreen()));
       },
       () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ReservierungScreen()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => ReservierungScreen()));
       },
       () {
         Navigator.of(context)
@@ -43,6 +44,7 @@ class _AusleihenScreenState extends State<AusleihenScreen> {
 
   @override
   Widget build(BuildContext context) {
+    isSmall = (MediaQuery.of(context).size.height < 700);
     return DynamicScaffold(
       drawer: Container(),
       appbar: AppBar(
@@ -65,7 +67,7 @@ class _AusleihenScreenState extends State<AusleihenScreen> {
           SliverAppBar(
             centerTitle: true,
             pinned: true,
-            expandedHeight: 170 + 64,
+            expandedHeight: isSmall ? (115) : (170 + 64),
             backgroundColor: config.getPrimaryColor(),
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
@@ -89,7 +91,7 @@ class _AusleihenScreenState extends State<AusleihenScreen> {
                   config.getBeschreibungText(),
                   textAlign: TextAlign.justify,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               ),
