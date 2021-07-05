@@ -8,6 +8,7 @@ import 'package:leihladen_frontend_drei/config/screens/warenkorb_screen_config.d
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
 import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/reservierung_screen.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/zeitraum_auswaehlen_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/animated_button_widget.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
@@ -25,6 +26,7 @@ class WarenkorbScreen extends StatelessWidget {
       "http://medsrv.informatik.hs-fulda.de/leihladenapp/data/config/leihladenfulda/boot/nackt.jpg";
 
   String inventarnummer = "";
+  ZeitraumAuswaehlenScreen zaw = ZeitraumAuswaehlenScreen(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +65,13 @@ class WarenkorbScreen extends StatelessWidget {
                 IconButton(
                   onPressed: () {},
                   icon: Icon(Icons.save_outlined),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => zaw));
+                  },
+                  icon: Icon(Icons.calendar_today_outlined),
                 ),
                 IconButton(
                   onPressed: () {
