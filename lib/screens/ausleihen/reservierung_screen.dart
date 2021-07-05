@@ -1,29 +1,28 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/reservierung_screen_config.dart';
+import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
+import 'package:leihladen_frontend_drei/messaging/answer.dart';
+import 'package:leihladen_frontend_drei/messaging/api/v1/rest.dart';
+import 'package:leihladen_frontend_drei/messaging/communication.dart';
+import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/screens/start_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
+import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
 class ReservierungScreen extends StatelessWidget {
+  final DataModelController dmc = Get.find();
+
   ReservierungScreenConfig config = new ReservierungScreenConfig();
   String title = "Reservierung";
-  String beschreibung = "Lorem ipsum dolor sit amet, consetetur"
-      " sadipscing elitr, sed diam nonumy eirmod tempor"
-      " invidunt ut labore et dolore magna aliquyam erat,"
-      " sed diam voluptua. At vero eos et accusam et justo"
-      " duo dolores et ea rebum. Stet clita kasd gubergren,"
-      " no sea takimata sanctus est Lorem ipsum dolor sit amet."
-      " Lorem ipsum dolor sit amet, consetetur sadipscing elitr,"
-      " sed diam nonumy eirmod tempor invidunt ut labore et dolore"
-      " magna aliquyam erat, sed diam voluptua. At vero eos et"
-      " accusam et justo duo dolores et ea rebum. Stet clita"
-      " kasd gubergren, no sea takimata sanctus est"
-      " Lorem ipsum dolor sit amet.";
+  String beschreibung = "Die für Sie reservierte Dinge";
   String imageUrl =
       "http://medsrv.informatik.hs-fulda.de/leihladenapp/data/config/leihladenfulda/boot/nackt.jpg";
-  String inventarnummer = "";
+
+  Rest restApi = new Rest();
 
   ReservierungScreen();
 
@@ -37,20 +36,42 @@ class ReservierungScreen extends StatelessWidget {
         title: Text(title),
       ),
       showAppbar: false,
-      fab: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => StartScreen()));
+      fab: Container(),
+      showFab: false,
+      body: FutureBuilder(
+        future: restApi.reservierungListUdid(dmc.store.value.leihausweis.udid),
+        // a previously-obtained Future<String> or null
+        builder: (BuildContext context, AsyncSnapshot<List<Answer>> snapshot) {
+          // Fall 1: keine Daten geladen
+          if (snapshot.connectionState == ConnectionState.none &&
+              snapshot.hasData == null) {
+            return Container(
+              color: Colors.red,
+            );
+          }
+          // Fall 2: Daten werden noch geladen
+          if (!snapshot.hasData) {
+            return Container(
+                color: Colors.blue,
+                child: Center(
+                  child: Text(
+                    "loading data....",
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ));
+          } else {
+            // Fall 3: Daten wurden geladen und können angezeigt werden
+            List<Answer> result = snapshot.data as List<Answer>;
+            return _buildContent(context, result);
+          }
         },
-        child: Text("W+", style: TextStyle(color: Colors.white)),
-        backgroundColor: config.getPrimaryColor(),
       ),
-      showFab: true,
-      body: _buildContent(context),
     );
   }
 
-  Widget _buildContent(BuildContext context) {
+  Widget _buildContent(BuildContext context, List<Answer> result) {
     return Scaffold(
       //endDrawer: AppDrawerWidget(),
       body: CustomScrollView(
@@ -65,14 +86,6 @@ class ReservierungScreen extends StatelessWidget {
                 IconButton(
                   onPressed: () {},
                   icon: Icon(Icons.clear),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.save_outlined),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.shopping_bag_outlined),
                 ),
               ],
               flexibleSpace: FlexibleSpaceBar(
@@ -102,14 +115,34 @@ class ReservierungScreen extends StatelessWidget {
                 ),
               )),
           SliverToBoxAdapter(
-            child: _buildBeschreibung(beschreibung +
-                beschreibung +
-                beschreibung +
-                beschreibung +
-                beschreibung),
+            child: _buildBeschreibung(beschreibung),
           ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: _buildWarenkorbCard(result[index]),
+                );
+              },
+              childCount: result.length,
+            ),
+          )
         ],
       ),
+    );
+  }
+
+  Widget _buildWarenkorbCard(Answer answer) {
+    //String inventarnummer = DataModel.store.value.warenkorb.data[index];
+    print(answer.inventarnummer);
+    String inventarnummer = answer.inventarnummer;
+    Eintrag entry = dmc.katalog.getEintrayByInventarnummer(inventarnummer);
+    print(entry.beschreibung);
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: EntryCardWidget(entry),
     );
   }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart';
+import 'package:leihladen_frontend_drei/messaging/answer.dart';
 import 'package:leihladen_frontend_drei/messaging/communication.dart';
 
 // REST API V1
@@ -290,10 +291,12 @@ class Rest {
 
   //r.Get("/rest/reservierung/list/all", http.HandlerFunc(getAllReservierung))
 
-  Future<String> reservierungListAll() async {
+  Future<List<Answer>> reservierungListAll() async {
     String result =
-        await com.makeGetRequest(com.hostname, "/rest/reservierung/list/all");
-    return result;
+        await com.makeGetRequest(com.serverPort, "/rest/reservierung/list/all");
+
+    List<Answer> liste = answerFromJson(result);
+    return liste;
   }
 
   //r.Get("/rest/reservierung/list/all/date/:date", http.HandlerFunc(getReservierungByDate))
@@ -322,10 +325,12 @@ class Rest {
 
   //r.Get("/rest/reservierung/list/:udid", http.HandlerFunc(getReservierungByUdid))
 
-  Future<String> reservierungListUdid(String udid) async {
+  Future<List<Answer>> reservierungListUdid(String udid) async {
     String result = await com.makeGetRequest(
         "${com.serverPort}", "/rest/reservierung/list/${udid}");
-    return result;
+
+    List<Answer> liste = answerFromJson(result);
+    return liste;
   }
 
   //r.Get("/rest/reservierung/delete/:udid", http.HandlerFunc(deleteReservierungByUdid))

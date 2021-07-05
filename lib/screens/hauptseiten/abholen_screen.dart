@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/screens/abholen_screen_config.dart';
+import 'package:leihladen_frontend_drei/screens/abholen/laden_info_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/app_drawer_widget.dart';
 
 class AbholenScreen extends StatelessWidget {
@@ -35,14 +36,23 @@ class AbholenScreen extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return Container(
-                  height: 700,
-                  width: 500,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(config.getMapImageUrl()),
-                      )),
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => LadenInfoScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 700,
+                    width: 500,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(config.getMapImageUrl()),
+                    )),
+                  ),
                 );
               },
               childCount: 1,

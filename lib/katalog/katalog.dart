@@ -88,8 +88,12 @@ class Katalog {
       }
     }
     return Eintrag(
-        inventarnummer: inventarnummer,
-        beschreibung: "Eintrag für diese Inventarnummer nicht gefunden,",
-        bezeichnung: "404: Eintrag nicht gefunden.");
+      inventarnummer: inventarnummer,
+      beschreibung: "Eintrag für diese Inventarnummer nicht gefunden,",
+      bezeichnung: "404: Eintrag nicht gefunden.",
+      bilder: [
+        ""
+      ],
+    );
   }
 }
