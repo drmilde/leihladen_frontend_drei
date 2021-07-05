@@ -8,7 +8,6 @@ class ZeitraumAuswaehlenScreen extends StatefulWidget {
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now().add(Duration(days: 7));
 
-
   ZeitraumAuswaehlenScreen(this.startDate) {
     startDate = nextFriday(startDate);
     endDate = startDate.add(Duration(days: 7));
@@ -22,6 +21,9 @@ class ZeitraumAuswaehlenScreen extends StatefulWidget {
     return d.add(Duration(days: diff));
   }
 
+  String getUSDateString(DateTime d) {
+    return ("${d.year}-${d.month}-${d.day}");
+  }
 
   @override
   _ZeitraumAuswaehlenScreenState createState() =>
@@ -117,7 +119,6 @@ class _ZeitraumAuswaehlenScreenState extends State<ZeitraumAuswaehlenScreen> {
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
-        print(selectedDay);
         _focusedDay = focusedDay;
         _selectedDay = selectedDay;
         _startDate = widget.nextFriday(_selectedDay);
@@ -125,5 +126,4 @@ class _ZeitraumAuswaehlenScreenState extends State<ZeitraumAuswaehlenScreen> {
       });
     }
   }
-
 }
