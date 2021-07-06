@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/reservierung_screen_config.dart';
 import 'package:leihladen_frontend_drei/widgets/animated_button_widget.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
@@ -72,16 +73,20 @@ class _ZeitraumAuswaehlenScreenState extends State<ZeitraumAuswaehlenScreen> {
                   "\n\nGewählter Reservierungszeitraum:\n"),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                  child: Text(
-                      "${_startDate.day}.${_startDate.month}.${_startDate.year} - ")),
-              Container(
-                  child: Text(
-                      "${_endDate.day}.${_endDate.month}.${_endDate.year}")),
-            ],
+          Center(
+            child: Container(
+              width: 300,
+              color: config.getPrimaryColor(),
+              child: Text(
+                  "${_startDate.day}.${_startDate.month}.${_startDate.year} - "
+                      "${_endDate.day}.${_endDate.month}.${_endDate.year}",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.nunito(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  )),
+            ),
           ),
           SizedBox(
             height: 16,

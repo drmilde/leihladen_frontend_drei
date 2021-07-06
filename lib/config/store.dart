@@ -41,13 +41,13 @@ class Store {
     this.version = "1.0";
     this.stand = "14.6.2021";
     this.leihausweis = Leihausweis(
-      adresse: "Dingelstedtstrasse 12, Fulda",
-      geburtsjahr: "2019",
-      vorname: "Leihausweis erstellen",
-      nachname: "Bitte",
-      mobile: "leihladenfulda@gmail.com",
-      passwort: "kein passwort",
-      udid: "keine ausweisnummer",
+      adresse: "",
+      geburtsjahr: "",
+      vorname: "",
+      nachname: "",
+      mobile: "",
+      passwort: "",
+      udid: "",
     );
     this.warenkorb = Warenkorb(
       data: [],
