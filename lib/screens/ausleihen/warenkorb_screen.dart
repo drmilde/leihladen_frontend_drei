@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/warenkorb_screen_config.dart';
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
+import 'package:leihladen_frontend_drei/messaging/answer.dart';
 import 'package:leihladen_frontend_drei/messaging/api/v1/rest.dart';
 import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/leihausweis_screen.dart';
@@ -160,15 +161,13 @@ class WarenkorbScreen extends StatelessWidget {
                   AnimatedButtonWidget(
                     callback: () {
                       // Hier reservieren
-
                       _doReservierung(context);
                     },
-                    text: "Reservierung",
+                    text: "Reservieren!",
                     color: config.getPrimaryColor(),
                   ),
                 ],
               ),
-
             ],
           ),
           SizedBox(
@@ -189,7 +188,7 @@ class WarenkorbScreen extends StatelessWidget {
     );
   }
 
-  void _doReservierung(BuildContext context) {
+  void _doReservierung(BuildContext context) async {
     String startDate = zaw.getUSDateString(zaw.startDate);
     String endDate = zaw.getUSDateString(zaw.endDate);
     String udid = dmc.store.value.leihausweis.udid;
@@ -201,11 +200,23 @@ class WarenkorbScreen extends StatelessWidget {
       return;
     }
 
+    List<Answer> bereitsReseviert =
+        await restApi.reservierungListUdid(udid: udid);
+
     // Reservierung durchführen
     // TODO check, ob bereits reserviert
     for (String inventarnummer in dmc.store.value.warenkorb.data) {
-      restApi.reservierungAddUdidInventarnummer(
-          udid, inventarnummer, startDate, endDate);
+      bool doesContain = false;
+      for (Answer a in bereitsReseviert) {
+        if (a.inventarnummer == inventarnummer) {
+          doesContain = true;
+          break;
+        }
+      }
+      if (!doesContain) {
+        restApi.reservierungAddUdidInventarnummer(
+            udid, inventarnummer, startDate, endDate);
+      }
     }
     Navigator.push(
       context,
