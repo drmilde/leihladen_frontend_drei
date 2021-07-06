@@ -53,7 +53,6 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
      */
   }
 
-
   @override
   void dispose() {
     // TODO: implement dispose
@@ -108,19 +107,9 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
         children: [
           Padding(
               padding: const EdgeInsets.all(8.0),
-              /*
-            child: Text(
-              "Füllen Sie bitte das Formular aus und erstellen Sie so Ihren digitalen Leihausweis."
-              " Mit dem digitalen Leihausweis weisen Sie sich vor Ort im Leihladen aus."
-              " Ihre Daten werden *NICHT* übertragen und ausschliesslich auf Ihrem Handy gespeichert."
-              " Wir haben keinen Zugriff auf Ihrer personenbezogenen Daten."
-              "\n\nIhre Ausweisnummer: ${UDID.hashCode}",
-              textAlign: TextAlign.justify,
-            ),
-             */
               child: Container(
                 child: Text(
-                  "${config.getBeschreibungText()} \n\nAusweisnummer: ${UDID.hashCode}",
+                  "${config.getBeschreibungText()} \n\nAusweisnummer: ${_splitHashCode()}",
                   textAlign: TextAlign.justify,
                   style: GoogleFonts.nunito(
                     fontSize: 14,
@@ -238,6 +227,16 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
     );
   }
 
+  String _splitHashCode() {
+    String result = "${UDID.hashCode}";
+    result = result.substring(0, 3) +
+        " " +
+        result.substring(3, 6) +
+        " " +
+        result.substring(6, 9);
+    return result;
+  }
+
   void _updateUdid({bool callSteState = true}) {
     String name = _controllerNachname.text.trim();
     String vorname = _controllerVorname.text.trim();
@@ -246,6 +245,7 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
     String geburtsjahr = _controllerGeburtsjahr.text.trim();
     String passwort = _controllerPasswort.text.trim();
     UDID = "${name}:${vorname}:${adresse}:${email}:${geburtsjahr}:${passwort}";
+    transmitData();
     // update UI
     if (callSteState) {
       setState(() {});
@@ -321,15 +321,13 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
   }
 
   void transmitData() {
-    dmc.store.value.leihausweis.nachname =
-        _controllerNachname.text.trim();
+    dmc.store.value.leihausweis.nachname = _controllerNachname.text.trim();
     dmc.store.value.leihausweis.vorname = _controllerVorname.text.trim();
     dmc.store.value.leihausweis.adresse = _controllerAdresse.text.trim();
     dmc.store.value.leihausweis.mobile = _controllerMobile.text.trim();
     dmc.store.value.leihausweis.geburtsjahr =
         _controllerGeburtsjahr.text.trim();
-    dmc.store.value.leihausweis.passwort =
-        _controllerPasswort.text.trim();
+    dmc.store.value.leihausweis.passwort = _controllerPasswort.text.trim();
     dmc.store.value.leihausweis.udid = "${UDID.hashCode}";
   }
 

@@ -7,9 +7,7 @@ import 'package:leihladen_frontend_drei/config/screens/reservierung_screen_confi
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
 import 'package:leihladen_frontend_drei/messaging/answer.dart';
 import 'package:leihladen_frontend_drei/messaging/api/v1/rest.dart';
-import 'package:leihladen_frontend_drei/messaging/communication.dart';
 import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
-import 'package:leihladen_frontend_drei/screens/start_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
@@ -17,8 +15,8 @@ class ReservierungScreen extends StatelessWidget {
   final DataModelController dmc = Get.find();
 
   ReservierungScreenConfig config = new ReservierungScreenConfig();
-  String title = "Reservierung";
-  String beschreibung = "Die für Sie reservierte Dinge";
+  String title = "Reservieruong";
+  String beschreibung = "Die für Sie reservierte Dinge.";
   String imageUrl =
       "http://medsrv.informatik.hs-fulda.de/leihladenapp/data/config/leihladenfulda/boot/nackt.jpg";
 
@@ -39,7 +37,9 @@ class ReservierungScreen extends StatelessWidget {
       fab: Container(),
       showFab: false,
       body: FutureBuilder(
-        future: restApi.reservierungListUdid(dmc.store.value.leihausweis.udid),
+        future: restApi.reservierungListUdid(
+            udid: dmc.store.value.leihausweis.udid
+        ),
         // a previously-obtained Future<String> or null
         builder: (BuildContext context, AsyncSnapshot<List<Answer>> snapshot) {
           // Fall 1: keine Daten geladen
@@ -80,7 +80,7 @@ class ReservierungScreen extends StatelessWidget {
           SliverAppBar(
               centerTitle: true,
               pinned: true,
-              expandedHeight: 400,
+              expandedHeight: 200,
               backgroundColor: config.getPrimaryColor(),
               actions: [
                 IconButton(

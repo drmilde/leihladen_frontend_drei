@@ -325,7 +325,8 @@ class Rest {
 
   //r.Get("/rest/reservierung/list/:udid", http.HandlerFunc(getReservierungByUdid))
 
-  Future<List<Answer>> reservierungListUdid(String udid) async {
+  Future<List<Answer>> reservierungListUdid({String udid = "unbekannt"}) async {
+    udid = (udid == "") ? "unbekannt": udid;
     String result = await com.makeGetRequest(
         "${com.serverPort}", "/rest/reservierung/list/${udid}");
 
