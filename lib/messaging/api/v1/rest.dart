@@ -330,7 +330,9 @@ class Rest {
     String result = await com.makeGetRequest(
         "${com.serverPort}", "/rest/reservierung/list/${udid}");
 
+    print (result);
     List<Answer> liste = answerFromJson(result);
+
     return liste;
   }
 
@@ -362,7 +364,7 @@ class Rest {
 
   Future<String> reservierungAddUdidInventarnummer(
       String udid, String inventarnummer, String start, String ende) async {
-    String result = await com.makeGetRequest("${com.serverName}:${com.port}",
+    String result = await com.makeGetRequest("${com.serverPort}",
         "/rest/reservierung/add/${udid}/${inventarnummer}/${start}/${ende}");
 
     return result;

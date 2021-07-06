@@ -23,7 +23,11 @@ class ZeitraumAuswaehlenScreen extends StatefulWidget {
   }
 
   String getUSDateString(DateTime d) {
-    return ("${d.year}-${d.month}-${d.day}");
+    String year = "${d.year}";
+    String month = (d.month < 10)? "0${d.month}": "${d.month}";
+    String day = (d.day < 10)? "0${d.day}": "${d.day}";
+
+    return ("${year}-${month}-${day}");
   }
 
   @override

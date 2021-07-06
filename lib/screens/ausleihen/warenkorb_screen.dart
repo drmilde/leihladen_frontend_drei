@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/warenkorb_screen_config.dart';
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
+import 'package:leihladen_frontend_drei/messaging/api/v1/rest.dart';
 import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
+import 'package:leihladen_frontend_drei/screens/ausleihen/leihausweis_screen.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/reservierung_screen.dart';
 import 'package:leihladen_frontend_drei/screens/ausleihen/zeitraum_auswaehlen_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/animated_button_widget.dart';
@@ -27,6 +29,7 @@ class WarenkorbScreen extends StatelessWidget {
 
   String inventarnummer = "";
   ZeitraumAuswaehlenScreen zaw = ZeitraumAuswaehlenScreen(DateTime.now());
+  Rest restApi = new Rest();
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +71,8 @@ class WarenkorbScreen extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => zaw));
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) => zaw));
                   },
                   icon: Icon(Icons.calendar_today_outlined),
                 ),
@@ -156,10 +159,9 @@ class WarenkorbScreen extends StatelessWidget {
               ),
               AnimatedButtonWidget(
                 callback: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ReservierungScreen()));
+                  // Hier reservieren
+
+                  _doReservierung(context);
                 },
                 text: "Reservierung",
                 color: config.getPrimaryColor(),
@@ -180,6 +182,32 @@ class WarenkorbScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _doReservierung(BuildContext context) {
+    String startDate = zaw.getUSDateString(zaw.startDate);
+    String endDate = zaw.getUSDateString(zaw.endDate);
+    String udid = dmc.store.value.leihausweis.udid;
+
+    // leeres Formular -> Leihausweis nicht gültig
+    if (udid == "53317557") {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => LeihausweisScreen()));
+      return;
+    }
+
+    // Reservierung durchführen
+    // TODO check, ob bereits reserviert
+    for (String inventarnummer in dmc.store.value.warenkorb.data) {
+      restApi.reservierungAddUdidInventarnummer(
+          udid, inventarnummer, startDate, endDate);
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ReservierungScreen(),
       ),
     );
   }

@@ -11,18 +11,27 @@ import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
-class ReservierungScreen extends StatelessWidget {
+class ReservierungScreen extends StatefulWidget {
+
+  ReservierungScreen();
+
+  @override
+  _ReservierungScreenState createState() => _ReservierungScreenState();
+}
+
+class _ReservierungScreenState extends State<ReservierungScreen> {
   final DataModelController dmc = Get.find();
 
   ReservierungScreenConfig config = new ReservierungScreenConfig();
-  String title = "Reservieruong";
+
+  String title = "Reservierung";
+
   String beschreibung = "Die für Sie reservierte Dinge.";
+
   String imageUrl =
       "http://medsrv.informatik.hs-fulda.de/leihladenapp/data/config/leihladenfulda/boot/nackt.jpg";
 
   Rest restApi = new Rest();
-
-  ReservierungScreen();
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +47,7 @@ class ReservierungScreen extends StatelessWidget {
       showFab: false,
       body: FutureBuilder(
         future: restApi.reservierungListUdid(
-            udid: dmc.store.value.leihausweis.udid
-        ),
+            udid: dmc.store.value.leihausweis.udid),
         // a previously-obtained Future<String> or null
         builder: (BuildContext context, AsyncSnapshot<List<Answer>> snapshot) {
           // Fall 1: keine Daten geladen
@@ -75,7 +83,7 @@ class ReservierungScreen extends StatelessWidget {
     return Scaffold(
       //endDrawer: AppDrawerWidget(),
       body: CustomScrollView(
-        key: key,
+        key: widget.key,
         slivers: [
           SliverAppBar(
               centerTitle: true,
@@ -84,6 +92,13 @@ class ReservierungScreen extends StatelessWidget {
               backgroundColor: config.getPrimaryColor(),
               actions: [
                 IconButton(
+                  onPressed: () {
+                    setState(() {
+
+                    });
+                  },
+                  icon: Icon(Icons.refresh),
+                ),                IconButton(
                   onPressed: () {},
                   icon: Icon(Icons.clear),
                 ),
@@ -135,10 +150,8 @@ class ReservierungScreen extends StatelessWidget {
 
   Widget _buildWarenkorbCard(Answer answer) {
     //String inventarnummer = DataModel.store.value.warenkorb.data[index];
-    print(answer.inventarnummer);
     String inventarnummer = answer.inventarnummer;
     Eintrag entry = dmc.katalog.getEintrayByInventarnummer(inventarnummer);
-    print(entry.beschreibung);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

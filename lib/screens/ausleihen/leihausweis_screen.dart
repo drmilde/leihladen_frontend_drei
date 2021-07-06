@@ -41,7 +41,7 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
     _controllerGeburtsjahr.text = ausweis.geburtsjahr;
     _controllerPasswort.text = ausweis.passwort;
 
-    _updateUdid();
+    _updateUdid(callSetState: false);
 
     // reset to position 0
     // TODO reset to position 0
@@ -229,15 +229,23 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
 
   String _splitHashCode() {
     String result = "${UDID.hashCode}";
-    result = result.substring(0, 3) +
-        " " +
-        result.substring(3, 6) +
-        " " +
-        result.substring(6, 9);
+    if (result.length > 8) {
+      result = result.substring(0, 3) +
+          " " +
+          result.substring(3, 6) +
+          " " +
+          result.substring(6, 9);
+    } else {
+      result = result.substring(0, 3) +
+          " " +
+          result.substring(3, 6) +
+          " " +
+          result.substring(6, 8);
+    }
     return result;
   }
 
-  void _updateUdid({bool callSteState = true}) {
+  void _updateUdid({bool callSetState = true}) {
     String name = _controllerNachname.text.trim();
     String vorname = _controllerVorname.text.trim();
     String adresse = _controllerAdresse.text.trim();
@@ -247,7 +255,7 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
     UDID = "${name}:${vorname}:${adresse}:${email}:${geburtsjahr}:${passwort}";
     transmitData();
     // update UI
-    if (callSteState) {
+    if (callSetState) {
       setState(() {});
     }
   }
@@ -305,7 +313,7 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
     if (err > 0) {
       _popupValidationDialog(context);
     } else {
-      _updateUdid(callSteState: callSetState);
+      _updateUdid(callSetState: callSetState);
       transmitData();
       _saveData();
       Navigator.of(context).pop();
