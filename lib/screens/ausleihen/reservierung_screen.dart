@@ -12,7 +12,6 @@ import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
 class ReservierungScreen extends StatefulWidget {
-
   ReservierungScreen();
 
   @override
@@ -94,12 +93,18 @@ class _ReservierungScreenState extends State<ReservierungScreen> {
                 IconButton(
                   onPressed: () {
                     setState(() {
-
+                      // neu laden
                     });
                   },
                   icon: Icon(Icons.refresh),
-                ),                IconButton(
-                  onPressed: () {},
+                ),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      restApi.reservierungDeleteUdid(
+                          dmc.store.value.leihausweis.udid);
+                    });
+                  },
                   icon: Icon(Icons.clear),
                 ),
               ],
@@ -155,7 +160,15 @@ class _ReservierungScreenState extends State<ReservierungScreen> {
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: EntryCardWidget(entry),
+      child: Dismissible(
+          key: UniqueKey(),
+          onDismissed: (direction) {
+            // TODO remove from reservierung
+            setState(() {
+              restApi.reservierungDeleteInventarnummer(entry.inventarnummer);
+            });
+          },
+          child: EntryCardWidget(entry)),
     );
   }
 

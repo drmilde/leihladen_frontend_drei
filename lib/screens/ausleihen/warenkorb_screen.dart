@@ -69,22 +69,6 @@ class WarenkorbScreen extends StatelessWidget {
                   onPressed: () {},
                   icon: Icon(Icons.save_outlined),
                 ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) => zaw));
-                  },
-                  icon: Icon(Icons.calendar_today_outlined),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ReservierungScreen()));
-                  },
-                  icon: Icon(Icons.shopping_bag_outlined),
-                ),
               ],
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: false,
@@ -136,7 +120,14 @@ class WarenkorbScreen extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: EntryCardWidget(entry),
+      child: Dismissible(
+        key: UniqueKey(),
+        onDismissed: (direction) {
+          // TODO delete from warenkorb
+          dmc.warenkorbRemoveData(entry.inventarnummer);
+        },
+        child: EntryCardWidget(entry),
+      ),
     );
   }
 
@@ -150,22 +141,34 @@ class WarenkorbScreen extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 "Beschreibung",
                 style: GoogleFonts.nunito(
                     fontSize: fontSize, fontWeight: FontWeight.bold),
               ),
-              AnimatedButtonWidget(
-                callback: () {
-                  // Hier reservieren
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) => zaw));
+                    },
+                    icon: Icon(Icons.calendar_today_outlined),
+                  ),
+                  AnimatedButtonWidget(
+                    callback: () {
+                      // Hier reservieren
 
-                  _doReservierung(context);
-                },
-                text: "Reservierung",
-                color: config.getPrimaryColor(),
+                      _doReservierung(context);
+                    },
+                    text: "Reservierung",
+                    color: config.getPrimaryColor(),
+                  ),
+                ],
               ),
+
             ],
           ),
           SizedBox(

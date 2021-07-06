@@ -236,11 +236,13 @@ class _LeihausweisScreenState extends State<LeihausweisScreen> {
           " " +
           result.substring(6, 9);
     } else {
-      result = result.substring(0, 3) +
-          " " +
-          result.substring(3, 6) +
-          " " +
-          result.substring(6, 8);
+      if (result.length > 7) {
+        result = result.substring(0, 3) +
+            " " +
+            result.substring(3, 6) +
+            " " +
+            result.substring(6, 8);
+      }
     }
     return result;
   }

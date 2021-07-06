@@ -326,11 +326,10 @@ class Rest {
   //r.Get("/rest/reservierung/list/:udid", http.HandlerFunc(getReservierungByUdid))
 
   Future<List<Answer>> reservierungListUdid({String udid = "unbekannt"}) async {
-    udid = (udid == "") ? "unbekannt": udid;
+    udid = (udid == "") ? "unbekannt" : udid;
     String result = await com.makeGetRequest(
         "${com.serverPort}", "/rest/reservierung/list/${udid}");
 
-    print (result);
     List<Answer> liste = answerFromJson(result);
 
     return liste;
@@ -340,14 +339,14 @@ class Rest {
 
   Future<String> reservierungDeleteUdid(String udid) async {
     String result = await com.makeGetRequest(
-        com.hostname, "/rest/reservierung/delete/${udid}");
+        com.serverPort, "/rest/reservierung/delete/${udid}");
     return result;
   }
 
   //r.Get("/rest/reservierung/delete/inventarnummer/:inventarnummer", http.HandlerFunc(deleteReservierungByIn))
 
   Future<String> reservierungDeleteInventarnummer(String inventarnummer) async {
-    String result = await com.makeGetRequest(com.hostname,
+    String result = await com.makeGetRequest(com.serverPort,
         "/rest/reservierung/delete/inventarnummer/${inventarnummer}");
     return result;
   }

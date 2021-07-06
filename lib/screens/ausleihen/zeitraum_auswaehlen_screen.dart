@@ -24,8 +24,8 @@ class ZeitraumAuswaehlenScreen extends StatefulWidget {
 
   String getUSDateString(DateTime d) {
     String year = "${d.year}";
-    String month = (d.month < 10)? "0${d.month}": "${d.month}";
-    String day = (d.day < 10)? "0${d.day}": "${d.day}";
+    String month = (d.month < 10) ? "0${d.month}" : "${d.month}";
+    String day = (d.day < 10) ? "0${d.day}" : "${d.day}";
 
     return ("${year}-${month}-${day}");
   }
@@ -60,7 +60,7 @@ class _ZeitraumAuswaehlenScreenState extends State<ZeitraumAuswaehlenScreen> {
       showDrawer: false,
       appbar: AppBar(
         backgroundColor: config.getPrimaryColor(),
-        title: Text("Leihbeginn (1 Woche)"),
+        title: Text("Leihzeitraum (1 Woche)"),
       ),
       showAppbar: true,
       fab: Container(),
@@ -71,11 +71,11 @@ class _ZeitraumAuswaehlenScreenState extends State<ZeitraumAuswaehlenScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              child: Text("Der Leihladen Fulda hat jeweils am Freitag"
-                  " zwischen 16.00 und 17.30 Uhr für Sie geöffnet."
-                  " Wählen Sie den Beginn Ihrer Ausleihe. "
-                  "\n\nGewählter Reservierungszeitraum:\n"),
+              child: Text("Gewählter Leihzeitraum:"),
             ),
+          ),
+          SizedBox(
+            height: 8,
           ),
           Center(
             child: Container(
@@ -83,7 +83,7 @@ class _ZeitraumAuswaehlenScreenState extends State<ZeitraumAuswaehlenScreen> {
               color: config.getPrimaryColor(),
               child: Text(
                   "${_startDate.day}.${_startDate.month}.${_startDate.year} - "
-                      "${_endDate.day}.${_endDate.month}.${_endDate.year}",
+                  "${_endDate.day}.${_endDate.month}.${_endDate.year}",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.nunito(
                     color: Colors.white,
@@ -92,33 +92,19 @@ class _ZeitraumAuswaehlenScreenState extends State<ZeitraumAuswaehlenScreen> {
                   )),
             ),
           ),
-          SizedBox(
-            height: 16,
-          ),
-          Container(
-              child: TableCalendar(
-            firstDay: DateTime.utc(2010, 10, 16),
-            lastDay: DateTime.utc(2030, 3, 14),
-            focusedDay: _focusedDay,
-            onDaySelected: _onDaySelected,
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            selectedDayPredicate: (day) {
-              return isSameDay(_selectedDay, day);
-            },
-          )),
-          SizedBox(
-            height: 16,
-          ),
-          Center(
-            child: AnimatedButtonWidget(
-              callback: () {
-                widget.startDate = _startDate;
-                widget.endDate = _endDate;
-                Navigator.of(context).pop();
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+                child: TableCalendar(
+              firstDay: DateTime.utc(2010, 10, 16),
+              lastDay: DateTime.utc(2030, 3, 14),
+              focusedDay: _focusedDay,
+              onDaySelected: _onDaySelected,
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              selectedDayPredicate: (day) {
+                return isSameDay(_selectedDay, day);
               },
-              text: "Zeitraum wählen",
-              color: config.getPrimaryColor(),
-            ),
+            )),
           ),
         ],
       ),
@@ -132,6 +118,9 @@ class _ZeitraumAuswaehlenScreenState extends State<ZeitraumAuswaehlenScreen> {
         _selectedDay = selectedDay;
         _startDate = widget.nextFriday(_selectedDay);
         _endDate = _startDate.add(Duration(days: 7));
+
+        widget.startDate = _startDate;
+        widget.endDate = _endDate;
       });
     }
   }
