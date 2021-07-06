@@ -5,9 +5,11 @@ import 'package:leihladen_frontend_drei/widgets/app_drawer_widget.dart';
 
 class AbholenScreen extends StatelessWidget {
   AbholenScreenConfig config = AbholenScreenConfig();
+  bool isSmall = false;
 
   @override
   Widget build(BuildContext context) {
+    isSmall = (MediaQuery.of(context).size.height < 700);
     return Scaffold(
       endDrawer: AppDrawerWidget(),
       body: CustomScrollView(
@@ -15,7 +17,7 @@ class AbholenScreen extends StatelessWidget {
           SliverAppBar(
             centerTitle: false,
             pinned: true,
-            expandedHeight: 170 + 64,
+            expandedHeight: isSmall? (115): (170 + 64),
             //title: Text("Abholen"),
             backgroundColor: config.getPrimaryColor(),
             flexibleSpace: FlexibleSpaceBar(
