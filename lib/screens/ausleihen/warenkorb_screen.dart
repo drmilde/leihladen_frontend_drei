@@ -67,7 +67,9 @@ class WarenkorbScreen extends StatelessWidget {
                   icon: Icon(Icons.clear),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    dmc.saveStore();
+                  },
                   icon: Icon(Icons.save_outlined),
                 ),
               ],

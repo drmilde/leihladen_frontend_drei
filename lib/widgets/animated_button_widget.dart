@@ -6,8 +6,10 @@ class AnimatedButtonWidget extends StatefulWidget {
   GestureTapCallback? callback;
   Color? color;
   String text = "Warenkorb +";
+  double width = 100;
 
-  AnimatedButtonWidget({this.color, this.text = "Warenkorb+", this.callback});
+  AnimatedButtonWidget(
+      {this.color, this.text = "Warenkorb+", this.callback, this.width = 100});
 
   @override
   _AnimatedButtonWidgetState createState() => _AnimatedButtonWidgetState();
@@ -18,12 +20,20 @@ class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget> {
   double height = 35;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    width = widget.width;
+    height = 35;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
           widget.callback!();
-          width = (width > 100) ? 100 : 110;
+          width = (width > widget.width) ? widget.width : widget.width * 1.1;
           height = (height > 35) ? 35 : 40;
         });
       },
@@ -43,7 +53,7 @@ class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget> {
         height: height,
         onEnd: () {
           setState(() {
-            width = 100;
+            width = widget.width;
             height = 35;
           });
         },

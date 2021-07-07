@@ -82,7 +82,7 @@ class _KatalogFilteredListWidgetState extends State<KatalogFilteredListWidget> {
     List<Eintrag> filtered = search(dataInKategorie, term);
 
     String alphabet = "";
-
+    bool left = true;
     filtered.forEach((e) {
       String anfangsbuchstabe = e.bezeichnung.toLowerCase()[0];
       if ((sortState == 0) || (sortState == 1)) {
@@ -94,9 +94,10 @@ class _KatalogFilteredListWidgetState extends State<KatalogFilteredListWidget> {
       }
       Widget w = Padding(
         padding: const EdgeInsets.all(8.0),
-        child: _buildCard(e),
+        child: _buildCard(e, left: left),
       );
       liste.add(w);
+      left = !left;
     });
 
     return ListView.builder(
@@ -139,27 +140,27 @@ class _KatalogFilteredListWidgetState extends State<KatalogFilteredListWidget> {
     );
   }
 
-  Widget _buildCard(Eintrag entry) {
+  Widget _buildCard(Eintrag entry, {bool left = true}) {
     if (entry.bezeichnung.length >= 45) {
-      return _verybigCard(entry);
+      return _verybigCard(entry, left: left);
     }
     if (entry.bezeichnung.length >= 28) {
-      return _bigCard(entry);
+      return _bigCard(entry, left: left);
     } else {
-      return _smallCard(entry);
+      return _smallCard(entry, left: left);
     }
   }
 
-  Widget _verybigCard(Eintrag entry) {
-    return EntryCardWidget(entry, height: 410);
+  Widget _verybigCard(Eintrag entry, {bool left = true}) {
+    return EntryCardWidget(entry, height: 410, left: left,);
   }
 
-  Widget _bigCard(Eintrag entry) {
-    return EntryCardWidget(entry, height: 380);
+  Widget _bigCard(Eintrag entry, {bool left = true}) {
+    return EntryCardWidget(entry, height: 380, left: left,);
   }
 
-  Widget _smallCard(Eintrag entry) {
-    return EntryCardWidget(entry, height: 360);
+  Widget _smallCard(Eintrag entry, {bool left = true}) {
+    return EntryCardWidget(entry, height: 360, left: left,);
   }
 
   /// external config
