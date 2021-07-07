@@ -1,6 +1,6 @@
 {
-    "name": "leihladen_web_app",
-    "short_name": "leihladen_web_app",
+    "name": "Leihladen",
+    "short_name": "Leihladen",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
@@ -9,6 +9,11 @@
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
+        {
+            "src": "icons/Icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
         {
             "src": "icons/Icon-192.png",
             "sizes": "192x192",
