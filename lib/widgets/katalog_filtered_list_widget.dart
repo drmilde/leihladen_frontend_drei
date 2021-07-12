@@ -9,9 +9,10 @@ import 'package:leihladen_frontend_drei/widgets/entry_card_widget.dart';
 
 class KatalogFilteredListWidget extends StatefulWidget {
   int kategorie = 0;
+  String title = "HEADER";
   late _KatalogFilteredListWidgetState kataloFilteredState;
 
-  KatalogFilteredListWidget({this.kategorie = 0}) {
+  KatalogFilteredListWidget({this.kategorie = 0, this.title = "HEADER"}) {
     kataloFilteredState = new _KatalogFilteredListWidgetState();
   }
 
@@ -76,7 +77,24 @@ class _KatalogFilteredListWidgetState extends State<KatalogFilteredListWidget> {
 
   Widget _buildListView(Katalog catalog) {
     List<Widget> liste = [];
-    //liste.add(_makeListHeader());
+    liste.add(Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        color: config.getPrimaryColor(),
+        height: 32,
+        width: double.infinity,
+        child: Center(
+          child: Text(
+            widget.title,
+            style: GoogleFonts.nunito(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+        ),
+      ),
+    ));
 
     List<Eintrag> dataInKategorie = catalog.filterKategorie(widget.kategorie);
     List<Eintrag> filtered = search(dataInKategorie, term);
@@ -152,15 +170,27 @@ class _KatalogFilteredListWidgetState extends State<KatalogFilteredListWidget> {
   }
 
   Widget _verybigCard(Eintrag entry, {bool left = true}) {
-    return EntryCardWidget(entry, height: 410, left: left,);
+    return EntryCardWidget(
+      entry,
+      height: 410,
+      left: left,
+    );
   }
 
   Widget _bigCard(Eintrag entry, {bool left = true}) {
-    return EntryCardWidget(entry, height: 380, left: left,);
+    return EntryCardWidget(
+      entry,
+      height: 380,
+      left: left,
+    );
   }
 
   Widget _smallCard(Eintrag entry, {bool left = true}) {
-    return EntryCardWidget(entry, height: 360, left: left,);
+    return EntryCardWidget(
+      entry,
+      height: 360,
+      left: left,
+    );
   }
 
   /// external config

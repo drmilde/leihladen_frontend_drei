@@ -165,7 +165,14 @@ class WarenkorbScreen extends StatelessWidget {
                       // Hier reservieren
                       _doReservierung(context);
                     },
-                    text: "Reservieren!",
+                    child: Text(
+                      "Reservieren",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.nunito(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
                     color: config.getPrimaryColor(),
                   ),
                 ],

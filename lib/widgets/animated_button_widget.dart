@@ -5,11 +5,11 @@ import 'package:leihladen_frontend_drei/widgets/animated_delete_button.dart';
 class AnimatedButtonWidget extends StatefulWidget {
   GestureTapCallback? callback;
   Color? color;
-  String text = "Warenkorb +";
+  Widget? child = Container();
   double width = 100;
 
   AnimatedButtonWidget(
-      {this.color, this.text = "Warenkorb+", this.callback, this.width = 100});
+      {this.color, @required this.child, this.callback, this.width = 100});
 
   @override
   _AnimatedButtonWidgetState createState() => _AnimatedButtonWidgetState();
@@ -33,7 +33,7 @@ class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget> {
       onTap: () {
         setState(() {
           widget.callback!();
-          width = (width > widget.width) ? widget.width : widget.width * 1.1;
+          width = (width != widget.width) ? widget.width : widget.width * 1.1;
           height = (height > 35) ? 35 : 40;
         });
       },
@@ -58,14 +58,7 @@ class _AnimatedButtonWidgetState extends State<AnimatedButtonWidget> {
           });
         },
         child: Center(
-          child: Text(
-            widget.text,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.nunito(
-              color: Colors.white,
-              fontSize: 12,
-            ),
-          ),
+          child: widget.child,
         ),
       ),
     );

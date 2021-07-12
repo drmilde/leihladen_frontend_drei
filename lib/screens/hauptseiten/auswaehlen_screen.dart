@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leihladen_frontend_drei/config/screens/auswaehlen_screen_config.dart';
 import 'package:leihladen_frontend_drei/screens/katalog/katalog_screen.dart';
+import 'package:leihladen_frontend_drei/screens/katalog/katalog_tab_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/app_drawer_widget.dart';
 import 'package:leihladen_frontend_drei/widgets/dynamic_scaffold.dart';
 import 'package:leihladen_frontend_drei/widgets/kachel_widget.dart';
@@ -119,7 +120,7 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
   @override
   Widget build(BuildContext context) {
     isSmall = (MediaQuery.of(context).size.height < 700);
-    smallSize = (MediaQuery.of(context).size.height < 600)? 0: 115;
+    smallSize = (MediaQuery.of(context).size.height < 600) ? 0 : 115;
     return DynamicScaffold(
       drawer: Container(),
       appbar: AppBar(
@@ -142,7 +143,7 @@ class _AuswaehlenScreenState extends State<AuswaehlenScreen> {
           SliverAppBar(
             centerTitle: true,
             pinned: true,
-            expandedHeight: isSmall? (smallSize): (170 + 64),
+            expandedHeight: isSmall ? (smallSize) : (170 + 64),
             backgroundColor: config.getPrimaryColor(),
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,

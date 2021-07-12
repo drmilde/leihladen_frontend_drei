@@ -14,6 +14,7 @@ class KatalogScreen extends StatefulWidget {
   KatalogScreen({this.kategorie = 0, this.title = "Katalog"}) {
     listWidget = KatalogFilteredListWidget(
       kategorie: this.kategorie,
+      title: title,
     );
   }
 

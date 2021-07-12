@@ -98,29 +98,43 @@ class EntryCardWidget extends StatelessWidget {
             SizedBox(
               height: 8,
             ),
-            Stack(
-              children: [
-                Container(
-                    //color: Colors.lime,
-                    height: 45,
-                    width: double.infinity),
-                Positioned(
-                  top: 5,
-                  right: 16,
-                  child: AnimatedButtonWidget(
-                    color: config.getPrimaryColor(),
-                    width: 35,
-                    text: "+",
-                    callback: () {
-                      dmc.warenkorbAddData(entry.inventarnummer);
-                    },
-                  ),
-                ),
-              ],
-            ),
+            _warenKorbRow(entry),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _warenKorbRow(Eintrag entry) {
+    return Stack(
+      children: [
+        Container(
+          //color: Colors.lime,
+          height: 45,
+          width: double.infinity,
+        ),
+        Positioned.fill(
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text("Inventarunmmer : ${entry.inventarnummer}"),
+          ),
+        ),
+        Positioned(
+          top: 5,
+          right: 16,
+          child: AnimatedButtonWidget(
+            color: config.getPrimaryColor(),
+            width: 35,
+            child: Icon(
+              Icons.add_shopping_cart,
+              color: Colors.white,
+            ),
+            callback: () {
+              dmc.warenkorbAddData(entry.inventarnummer);
+            },
+          ),
+        ),
+      ],
     );
   }
 

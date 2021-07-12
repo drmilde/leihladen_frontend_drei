@@ -40,7 +40,14 @@ class KatalogDetailScreen extends StatelessWidget {
       showAppbar: false,
       fab: AnimatedButtonWidget(
         color: config.getPrimaryColor(),
-        text: "Warenkorb+",
+        child: Text(
+          "+",
+          textAlign: TextAlign.center,
+          style: GoogleFonts.nunito(
+            color: Colors.white,
+            fontSize: 12,
+          ),
+        ),
         callback: () {
           dmc.warenkorbAddData(entry.inventarnummer);
         },
