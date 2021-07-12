@@ -59,7 +59,7 @@ class NeuigkeitenScreen extends StatelessWidget {
           SliverAppBar(
               centerTitle: true,
               pinned: true,
-              expandedHeight: 400,
+              expandedHeight: 200,
               backgroundColor: config.getPrimaryColor(),
               actions: [
                 IconButton(
@@ -102,11 +102,7 @@ class NeuigkeitenScreen extends StatelessWidget {
                 ),
               )),
           SliverToBoxAdapter(
-            child: _buildBeschreibung(beschreibung +
-                beschreibung +
-                beschreibung +
-                beschreibung +
-                beschreibung),
+            child: _buildBeschreibung(beschreibung),
           ),
         ],
       ),
