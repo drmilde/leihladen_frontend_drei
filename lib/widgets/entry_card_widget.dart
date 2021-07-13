@@ -34,7 +34,17 @@ class EntryCardWidget extends StatelessWidget {
                   entry: entry,
                 )));
       },
-      child: _newContent(height, entry, context, left: left),
+      child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 1,
+              color: Colors.black12,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _newContent(height, entry, context, left: left),
+          )),
     );
     //return _createOldContent(height, entry, context);
   }
@@ -116,7 +126,15 @@ class EntryCardWidget extends StatelessWidget {
         Positioned.fill(
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Text("Inventarunmmer : ${entry.inventarnummer}"),
+            child: Row(
+              children: [
+                Text("IN: ",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    )),
+                Text("${entry.inventarnummer}"),
+              ],
+            ),
           ),
         ),
         Positioned(

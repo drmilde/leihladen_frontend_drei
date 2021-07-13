@@ -66,9 +66,15 @@ class KatalogDetailScreen extends StatelessWidget {
           SliverAppBar(
             centerTitle: false,
             pinned: true,
-            expandedHeight: 400,
+            expandedHeight: 300,
             backgroundColor: config.getPrimaryColor(),
             actions: [
+              IconButton(
+                onPressed: () {
+                  // TODO show image popup
+                },
+                icon: Icon(Icons.add_box_outlined),
+              ),
               IconButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
