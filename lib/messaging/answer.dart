@@ -36,8 +36,8 @@ class Answer {
         inventarnummer: json["in"],
         status: json["status"],
         ext: json["ext"],
-        start: DateTime.parse(json["start"]),
-        ende: DateTime.parse(json["ende"]),
+        start: (json["start"] != "") ? DateTime.parse(json["start"]): DateTime.parse("2021-01-01"),
+        ende: (json["ende"] != "") ? DateTime.parse(json["ende"]): DateTime.parse("2021-12-31"),
         content: json["content"],
         udid: json["udid"],
       );

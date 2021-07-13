@@ -94,6 +94,7 @@ class Helper {
     return toTimeStringUs(DateTime.now());
   }
 
+  // TODO launchUrl umsetzen
   /*
   static launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -102,6 +103,7 @@ class Helper {
       throw 'Could not launch $url';
     }
   }
+
    */
 
   static String trimUdid(String udid) {

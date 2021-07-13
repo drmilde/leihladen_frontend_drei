@@ -119,10 +119,13 @@ class Rest {
 
   // NEWS API
   // r.Get("/rest/news/list/all", http.HandlerFunc(getAllNews))
-  Future<String> listAllNews() async {
+  Future<List<Answer>> listAllNews() async {
     String result =
-        await com.makeGetRequest(com.hostname, "/rest/news/list/all");
-    return result;
+        await com.makeGetRequest("${com.serverPort}", "/rest/news/list/all");
+
+    List<Answer> liste = answerFromJson(result);
+
+    return liste;
   }
 
   Future<String> addNews(String udid, String content) async {

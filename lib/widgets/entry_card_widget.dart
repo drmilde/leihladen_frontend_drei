@@ -1,15 +1,12 @@
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:leihladen_frontend_drei/config/screens/katalog_screen_config.dart';
 import 'package:leihladen_frontend_drei/katalog/eintrag.dart';
 import 'package:leihladen_frontend_drei/model/data_model_controller.dart';
 import 'package:leihladen_frontend_drei/screens/katalog/katalog_detail_screen.dart';
 import 'package:leihladen_frontend_drei/widgets/animated_button_widget.dart';
-import 'package:leihladen_frontend_drei/widgets/warenkorb_row_widget.dart';
 
 class EntryCardWidget extends StatelessWidget {
   final DataModelController dmc = Get.find();
